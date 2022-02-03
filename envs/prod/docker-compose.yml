@@ -30,8 +30,6 @@ services:
       service: smart_frontend
     build: ../../frontend/
     image: rti/smart-frontend-prod:R_0_0_1
-    ports:
-      - "${EXTERNAL_FRONTEND_PORT:-80}:80"
     command: node_modules/.bin/webpack --watch
 
   celery_worker:
