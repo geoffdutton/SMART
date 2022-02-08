@@ -25,7 +25,7 @@ services:
       - ../frontend:/code/frontend
       - smart_data:/data/
     ports:
-      - "${EXTERNAL_BACKEND_PORT:-8001}:8000"
+      - "${EXTERNAL_BACKEND_PORT:-8000}:8000"
     command: ./runserver.sh
 
   smart_frontend:

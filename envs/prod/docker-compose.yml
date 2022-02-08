@@ -28,9 +28,13 @@ services:
     extends:
       file: ../docker-common.yml
       service: smart_frontend
-    build: ../../frontend/
+    build:
+      context: ../../frontend/
+      dockerfile: Dockerfile.prod
     image: rti/smart-frontend-prod:R_0_0_1
-    command: node_modules/.bin/webpack --watch
+    ports:
+      - "${EXTERNAL_FRONTEND_PORT:-8080}:8080"
+    command: nginx -c /code/nginx.conf -g "daemon off;"
 
   celery_worker:
     extends:
