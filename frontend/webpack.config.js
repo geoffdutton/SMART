@@ -7,18 +7,27 @@ const release = process.env.NODE_ENV === "production";
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const StyleLintPlugin = require("stylelint-webpack-plugin");
+const BundleTracker = require("webpack-bundle-tracker");
+
+const DEV_SERVER_PORT = 3005;
 
 const config = {
     context: path.join(__dirname, "src"),
     devtool: "source-map",
     mode: "development",
+    output: {
+        publicPath: `http://localhost:${DEV_SERVER_PORT}/static/`,
+        path: path.resolve(__dirname, "dist"),
+        filename: "[name].[chunkhash].js"
+    },
     entry: {
         smart: "./smart.jsx",
         globals: "./globals.js",
         admins: "./admins.js"
     },
     devServer: {
-        writeToDisk: true
+        port: DEV_SERVER_PORT,
+        hot: true
     },
     module: {
         rules: [
@@ -124,11 +133,12 @@ const config = {
             }
         ]
     },
-    output: {
-        path: path.resolve(__dirname, "dist"),
-        filename: "[name].[chunkhash].js"
-    },
     plugins: [
+        new webpack.DefinePlugin({
+            DEBUG: release,
+            PRODUCTION: release,
+            "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV || "development")
+        }),
         new StyleLintPlugin({
             context: "/code/src/styles"
         }),
@@ -143,76 +153,15 @@ const config = {
             root: path.resolve(),
             verbose: true,
             dry: false
+        }),
+        new BundleTracker({
+            path: path.resolve(__dirname),
+            filename: "./webpack-stats.json",
         })
     ],
     resolve: {
-        modules: ["node_modules", path.join(__dirname, "src")],
         extensions: [".js", ".jsx"]
     }
 };
-
-if (release) {
-    config.plugins.push(
-        new webpack.DefinePlugin({
-            DEBUG: false,
-            PRODUCTION: true,
-            "process.env.NODE_ENV": JSON.stringify("production")
-        }),
-        new webpack.optimize.AggressiveMergingPlugin(),
-        // new webpack.optimize.OccurrenceOrderPlugin(),
-        // new webpack.optimize.UglifyJsPlugin({
-        //     mangle: true,
-        //     compress: {
-        //         warnings: false,
-        //         pure_getters: true,
-        //         unsafe_comps: true,
-        //         screw_ie8: true
-        //     },
-        //     output: {
-        //         comments: false
-        //     },
-        //     exclude: [/\.min\.js$/gi],
-        //     sourceMap: true
-        // }),
-        new webpack.LoaderOptionsPlugin({
-            minimize: true,
-            debug: false
-        })
-    );
-} else {
-    config.performance = {
-        assetFilter: function(assetFilename) {
-            return (
-                assetFilename.endsWith(".js") || assetFilename.endsWith(".css")
-            );
-        },
-        hints: "warning",
-        maxEntrypointSize: 1000000
-    };
-
-    config.profile = true;
-
-    config.plugins.push(
-        new webpack.DefinePlugin({
-            DEBUG: true,
-            PRODUCTION: false
-        })
-    );
-}
-
-config.plugins.push(
-    new webpack.optimize.SplitChunksPlugin({
-        name: "vendor",
-        minChunks: function(module) {
-            return (
-                module.context && module.context.indexOf("node_modules") !== -1
-            );
-        }
-    }),
-    new webpack.optimize.SplitChunksPlugin({
-        name: "manifest",
-        minChunks: Infinity
-    })
-);
 
 module.exports = config;
