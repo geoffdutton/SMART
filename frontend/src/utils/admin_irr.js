@@ -3,15 +3,15 @@
 function drawHeatmap(response) {
     let coders = response["coders"];
     let labels = response["labels"];
-    let coder1 = $('#coder1_select').val();
-    let coder2 = $('#coder2_select').val();
+    let coder1 = $("#coder1_select").val();
+    let coder2 = $("#coder2_select").val();
     let comb1 = coder1.toString() + "_" + coder2.toString();
     let comb2 = coder2.toString() + "_" + coder1.toString();
     let data;
-    if (comb1 in response['data']) {
-        data = response['data'][comb1];
+    if (comb1 in response["data"]) {
+        data = response["data"][comb1];
     } else {
-        data = response['data'][comb2];
+        data = response["data"][comb2];
     }
 
     let all_zero = true;
@@ -64,7 +64,7 @@ function drawHeatmap(response) {
         legendElementWidth = 30;
 
     //delete the old chart
-    d3.select('#heatmap').remove();
+    d3.select("#heatmap").remove();
 
     if (!all_zero) {
     //append the new svg to put everything in
@@ -117,7 +117,7 @@ function drawHeatmap(response) {
 
         let cards = svg.selectAll(".label2")
             .data(data, function(d) {
-                return d.label1 + ':' + d.label2;
+                return d.label1 + ":" + d.label2;
             });
         cards.append("title");
 
@@ -209,10 +209,10 @@ if (PROJECT_PERCENTAGE_IRR > 0) {
      */
     $.ajax({
         method: "GET",
-        url: '/api/get_irr_metrics/' + PROJECT_PK + '/',
+        url: "/api/get_irr_metrics/" + PROJECT_PK + "/",
         success: function (response) {
-            $('#kappa').text(response.kappa.toString());
-            $('#percent_agree').text(response['percent agreement'].toString());
+            $("#kappa").text(response.kappa.toString());
+            $("#percent_agree").text(response["percent agreement"].toString());
         },
         error: function (error) {
             console.log(error);
@@ -225,14 +225,14 @@ if (PROJECT_PERCENTAGE_IRR > 0) {
      */
     $.ajax({
         method: "GET",
-        url: '/api/heat_map_data/' + PROJECT_PK + '/',
+        url: "/api/heat_map_data/" + PROJECT_PK + "/",
         success: function (response) {
-            let coders = response['coders'];
+            let coders = response["coders"];
 
             if (coders.length >= 2) {
                 coders.map(function(coder){
-                    $('#coder1_select').append('<option value="' + coder.pk.toString() + '">' + coder.name + '</option>');
-                    $('#coder2_select').append('<option value="' + coder.pk.toString() + '">' + coder.name + '</option>');
+                    $("#coder1_select").append("<option value=\"" + coder.pk.toString() + "\">" + coder.name + "</option>");
+                    $("#coder2_select").append("<option value=\"" + coder.pk.toString() + "\">" + coder.name + "</option>");
                 });
                 drawHeatmap(response);
             }
@@ -242,10 +242,10 @@ if (PROJECT_PERCENTAGE_IRR > 0) {
         }
     });
 
-    $('#coder1_select').change(function () {
+    $("#coder1_select").change(function () {
         $.ajax({
-            method: 'GET',
-            url: '/api/heat_map_data/' + PROJECT_PK + '/',
+            method: "GET",
+            url: "/api/heat_map_data/" + PROJECT_PK + "/",
             success: function (response) {
                 drawHeatmap(response);
             },
@@ -255,10 +255,10 @@ if (PROJECT_PERCENTAGE_IRR > 0) {
         });
     });
 
-    $('#coder2_select').change(function () {
+    $("#coder2_select").change(function () {
         $.ajax({
-            method: 'GET',
-            url: '/api/heat_map_data/' + PROJECT_PK + '/',
+            method: "GET",
+            url: "/api/heat_map_data/" + PROJECT_PK + "/",
             success: function (response) {
                 drawHeatmap(response);
             },
@@ -272,8 +272,8 @@ if (PROJECT_PERCENTAGE_IRR > 0) {
         /*
          *  Activate DataTable script to create the labeled data DataTable
          */
-        $('#pairwise_perc_agreement_table').DataTable({
-            "ajax": '/api/perc_agree_table/' + PROJECT_PK + '/',
+        $("#pairwise_perc_agreement_table").DataTable({
+            "ajax": "/api/perc_agree_table/" + PROJECT_PK + "/",
             "columns": [
                 { "data": "First Coder", "searchable": true },
                 { "data": "Second Coder", "searchable": false },
@@ -285,7 +285,7 @@ if (PROJECT_PERCENTAGE_IRR > 0) {
             },
             "initComplete": function () {
                 let $this = $(this);
-                $this.css({ 'table-layout':'fixed' });
+                $this.css({ "table-layout":"fixed" });
             }
         });
     });

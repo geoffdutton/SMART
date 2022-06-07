@@ -41,6 +41,7 @@
         "newline-per-chained-call": ["error", {"ignoreChainWithDepth": 3}],
         "eol-last": ["error", "always"],
         "keyword-spacing": ["error", {"after": true, "before": true}],
-        "linebreak-style": ["error", "unix"]
+        "linebreak-style": ["error", "unix"],
+        "quotes": ["error"]
     }
 }

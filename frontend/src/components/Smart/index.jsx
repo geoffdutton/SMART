@@ -1,13 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 import { Tabs, Tab, Badge } from "react-bootstrap";
-import CardContainer from '../../containers/card_container';
-import HistoryContainer from '../../containers/history_container';
-import SkewContainer from '../../containers/skew_container';
-import AdminTableContainer from '../../containers/adminTable_container';
-import RecycleBinContainer from '../../containers/recycleBin_container';
-import CodebookLabelMenuContainer from '../../containers/codebookLabelMenu_container';
-import SmartProgressBarContainer from '../../containers/smartProgressBar_container';
+import CardContainer from "../../containers/card_container";
+import HistoryContainer from "../../containers/history_container";
+import SkewContainer from "../../containers/skew_container";
+import AdminTableContainer from "../../containers/adminTable_container";
+import RecycleBinContainer from "../../containers/recycleBin_container";
+import CodebookLabelMenuContainer from "../../containers/codebookLabelMenu_container";
+import SmartProgressBarContainer from "../../containers/smartProgressBar_container";
 
 const ADMIN = window.ADMIN;
 

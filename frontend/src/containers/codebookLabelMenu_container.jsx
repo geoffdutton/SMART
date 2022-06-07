@@ -1,7 +1,7 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from "react";
+import { connect } from "react-redux";
 
-import CodebookLabelMenu from '../components/CodebookLabelMenu';
+import CodebookLabelMenu from "../components/CodebookLabelMenu";
 
 const CodebookLabelMenuContainer = (props) => <CodebookLabelMenu {...props} />;
 

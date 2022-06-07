@@ -1,10 +1,9 @@
-import { createAction } from 'redux-actions';
-import 'whatwg-fetch';
+import { createAction } from "redux-actions";
 
-import { getConfig } from '../utils/fetch_configs';
+import { getConfig } from "../utils/fetch_configs";
 
-export const SET_AVAILABLE = 'SET_AVAILABLE';
-export const SET_ADMIN_COUNTS = 'SET_ADMIN_COUNTS';
+export const SET_AVAILABLE = "SET_AVAILABLE";
+export const SET_ADMIN_COUNTS = "SET_ADMIN_COUNTS";
 
 export const set_available = createAction(SET_AVAILABLE);
 export const set_admin_counts = createAction(SET_ADMIN_COUNTS);
@@ -26,7 +25,7 @@ export const getAdminCounts = (projectID) => {
             })
             .then(response => {
             // If error was in the response then set that message
-                if ('error' in response) console.log(response);
+                if ("error" in response) console.log(response);
                 dispatch(set_admin_counts(response.data));
             })
             .catch(err => console.log("Error: ", err));
@@ -49,7 +48,7 @@ export const getAdminTabsAvailable = (projectID) => {
             })
             .then(response => {
             // If error was in the response then set that message
-                if ('error' in response) console.log(response);
+                if ("error" in response) console.log(response);
                 if (response.available == 0) {
                     dispatch(set_available(false));
                 } else {

@@ -1,3 +1,23 @@
+# Data Labeler
+
+## Local demo
+Run: `bash seed_db.sh`
+
+When running, visit: `http://localhost:8099/`
+
+Login with one of the users:
+```
+root_auth = AuthUser.objects.create_user(
+    username="root", password="password555", email="test@test.com"
+)
+user1_auth = AuthUser.objects.create_user(
+    username="user1", password="password555", email="test@test.com"
+)
+test_user_auth = AuthUser.objects.create_user(
+    username="test_user", password="password555", email="test@test.com"
+)
+```
+
 # SMART
 <img src="docs/img/smart-banner.png" width="820" height="185">
 

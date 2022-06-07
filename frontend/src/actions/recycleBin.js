@@ -1,11 +1,10 @@
-import { createAction } from 'redux-actions';
-import 'whatwg-fetch';
+import { createAction } from "redux-actions";
 
-import { getConfig, postConfig } from '../utils/fetch_configs';
-import { setMessage } from './card';
-import { getUnlabeled } from './skew';
+import { getConfig, postConfig } from "../utils/fetch_configs";
+import { setMessage } from "./card";
+import { getUnlabeled } from "./skew";
 
-export const SET_DISCARDED_DATA = 'SET_DISCARDED_DATA';
+export const SET_DISCARDED_DATA = "SET_DISCARDED_DATA";
 
 export const set_discarded_data = createAction(SET_DISCARDED_DATA);
 
@@ -25,7 +24,7 @@ export const restoreData = (dataID, projectID) => {
                 }
             })
             .then(response => {
-                if ('error' in response) {
+                if ("error" in response) {
                     return dispatch(setMessage(response.error));
                 } else {
                     dispatch(getDiscarded(projectID));
@@ -51,7 +50,7 @@ export const getDiscarded = (projectID) => {
             })
             .then(response => {
             // If error was in the response then set that message
-                if ('error' in response) console.log(response);
+                if ("error" in response) console.log(response);
                 let all_data = [];
                 for (let i = 0; i < response.data.length; i++) {
                     const row = {

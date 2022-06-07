@@ -1,15 +1,14 @@
-import { createAction } from 'redux-actions';
-import 'whatwg-fetch';
+import { createAction } from "redux-actions";
 
-import { getConfig, postConfig } from '../utils/fetch_configs';
-import { getAdminCounts } from './smart';
-import { setMessage } from './card';
-import { getHistory } from './history';
-import { getUnlabeled, getLabelCounts } from './skew';
-import { getDiscarded } from './recycleBin';
+import { getConfig, postConfig } from "../utils/fetch_configs";
+import { getAdminCounts } from "./smart";
+import { setMessage } from "./card";
+import { getHistory } from "./history";
+import { getUnlabeled, getLabelCounts } from "./skew";
+import { getDiscarded } from "./recycleBin";
 
-export const SET_ADMIN_DATA = 'SET_ADMIN_DATA';
-export const SET_DISCARDED_DATA = 'SET_DISCARDED_DATA';
+export const SET_ADMIN_DATA = "SET_ADMIN_DATA";
+export const SET_DISCARDED_DATA = "SET_DISCARDED_DATA";
 
 export const set_admin_data = createAction(SET_ADMIN_DATA);
 export const set_discarded_data = createAction(SET_DISCARDED_DATA);
@@ -31,7 +30,7 @@ export const getAdmin = (projectID) => {
             })
             .then(response => {
             // If error was in the response then set that message
-                if ('error' in response) console.log(response);
+                if ("error" in response) console.log(response);
                 let all_data = [];
                 for (let i = 0; i < response.data.length; i++) {
                     const row = {
@@ -65,7 +64,7 @@ export const adminLabel = (dataID, labelID, projectID) => {
                 }
             })
             .then(response => {
-                if ('error' in response) {
+                if ("error" in response) {
                     return dispatch(setMessage(response.error));
                 } else {
                     dispatch(getUnlabeled(projectID));
@@ -93,7 +92,7 @@ export const discardData = (dataID, projectID) => {
                 }
             })
             .then(response => {
-                if ('error' in response) {
+                if ("error" in response) {
                     return dispatch(setMessage(response.error));
                 } else {
                     dispatch(getAdmin(projectID));

@@ -2,12 +2,12 @@ export const getCookie = (name) => {
     // https://docs.djangoproject.com/en/1.11/ref/csrf/#ajax
     let cookieValue = null;
 
-    if (document.cookie && document.cookie != '') {
-        let cookies = document.cookie.split(';');
+    if (document.cookie && document.cookie != "") {
+        let cookies = document.cookie.split(";");
         
         for (let i = 0; i < cookies.length; i++) {
             let cookie = cookies[i].trim();
-            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+            if (cookie.substring(0, name.length + 1) == (name + "=")) {
                 cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
                 break;
             }
@@ -20,12 +20,12 @@ export const getCookie = (name) => {
 export const deleteConfig = () => {
     return (
         {
-            method: 'DELETE',
-            credentials: 'same-origin',
+            method: "DELETE",
+            credentials: "same-origin",
             headers: {
-                'X-CSRFToken': getCookie('csrftoken'),
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                "X-CSRFToken": getCookie("csrftoken"),
+                "Accept": "application/json",
+                "Content-Type": "application/json"
             }
         }
     );
@@ -34,12 +34,12 @@ export const deleteConfig = () => {
 export const getConfig = () => {
     return (
         {
-            method: 'GET',
-            credentials: 'same-origin',
+            method: "GET",
+            credentials: "same-origin",
             headers: {
-                'X-CSRFToken': getCookie('csrftoken'),
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                "X-CSRFToken": getCookie("csrftoken"),
+                "Accept": "application/json",
+                "Content-Type": "application/json"
             },
         }
     );
@@ -48,12 +48,12 @@ export const getConfig = () => {
 export const patchConfig = (postData) => {
     return (
         {
-            method: 'PATCH',
-            credentials: 'same-origin',
+            method: "PATCH",
+            credentials: "same-origin",
             headers: {
-                'X-CSRFToken': getCookie('csrftoken'),
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
+                "X-CSRFToken": getCookie("csrftoken"),
+                "Content-Type": "application/json",
+                "Accept": "application/json"
             },
             body: JSON.stringify(postData)
         }
@@ -63,12 +63,12 @@ export const patchConfig = (postData) => {
 export const postConfig = (postData) => {
     return (
         {
-            method: 'POST',
-            credentials: 'same-origin',
+            method: "POST",
+            credentials: "same-origin",
             headers: {
-                'X-CSRFToken': getCookie('csrftoken'),
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
+                "X-CSRFToken": getCookie("csrftoken"),
+                "Content-Type": "application/json",
+                "Accept": "application/json"
             },
             body: JSON.stringify(postData)
         }

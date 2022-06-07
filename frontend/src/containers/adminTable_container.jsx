@@ -1,8 +1,8 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from "react";
+import { connect } from "react-redux";
 
-import { adminLabel, getAdmin, discardData } from '../actions/adminTables';
-import AdminTable from '../components/AdminTable';
+import { adminLabel, getAdmin, discardData } from "../actions/adminTables";
+import AdminTable from "../components/AdminTable";
 
 const PROJECT_ID = window.PROJECT_ID;
 

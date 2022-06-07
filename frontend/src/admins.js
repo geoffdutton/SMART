@@ -16,7 +16,7 @@ import "./utils/admin_irr.js";
 
 $(document).ready(function() {
     $(function() {
-        $('[data-toggle="tooltip"]').tooltip();
+        $("[data-toggle=\"tooltip\"]").tooltip();
     });
 });
 

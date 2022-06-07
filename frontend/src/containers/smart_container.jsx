@@ -1,8 +1,8 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from "react";
+import { connect } from "react-redux";
 
-import { getAdminTabsAvailable, getAdminCounts } from '../actions/smart';
-import Smart from '../components/Smart';
+import { getAdminTabsAvailable, getAdminCounts } from "../actions/smart";
+import Smart from "../components/Smart";
 
 const PROJECT_ID = window.PROJECT_ID;
 

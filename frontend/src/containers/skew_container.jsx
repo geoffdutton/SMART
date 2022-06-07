@@ -1,8 +1,8 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from "react";
+import { connect } from "react-redux";
 
-import { getUnlabeled, skewLabel, getLabelCounts } from '../actions/skew';
-import Skew from '../components/Skew';
+import { getUnlabeled, skewLabel, getLabelCounts } from "../actions/skew";
+import Skew from "../components/Skew";
 
 const PROJECT_ID = window.PROJECT_ID;
 

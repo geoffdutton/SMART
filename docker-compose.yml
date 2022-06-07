@@ -1,0 +1,61 @@
+services:
+  postgres:
+    image: postgres:10
+    environment:
+      - POSTGRES_PASSWORD=my-secret-password
+      - POSTGRES_USER=smart
+      - POSTGRES_DB=smart
+    ports:
+      - "${EXTERNAL_POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - smart_pgdata:/var/lib/postgresql/data
+
+  redis:
+    image: redis:5
+    ports:
+      - "${EXTERNAL_REDIS_PORT:-6379}:6379"
+
+  smart_backend:
+    ports:
+      - "${EXTERNAL_BACKEND_PORT:-8000}:8000"
+    build:
+      context: backend
+      dockerfile: backend/docker/Dockerfile
+    image: geoffd/smart-backend:${TAG:-latest}
+    volumes:
+      - ./backend/django:/code
+      - ./backend/docker:/code/docker
+      - ./frontend:/code/frontend
+      - smart_data:/data/
+    depends_on:
+      - postgres
+      - redis
+    command: ./runserver.sh
+
+  smart_frontend:
+    build: frontend
+    ports:
+      - "3005:3005"
+    image: geoffd/smart-frontend:${TAG:-latest}
+    command: npm run serve
+    volumes:
+      - ./frontend/:/code
+      - /code/node_modules
+
+  celery_worker:
+    volumes:
+      - ./backend/django:/code
+      - smart_data:/data/
+    build:
+      context: backend
+      dockerfile: backend/docker/Dockerfile
+    image: geoffd/smart-backend:dev
+    depends_on:
+      - postgres
+      - redis
+      - smart_backend
+    command: ./runcelery.sh
+
+volumes:
+  smart_pgdata:
+  smart_data:

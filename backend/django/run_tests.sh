@@ -1,12 +1,14 @@
 #!/bin/bash
 
 # wait for postgres to be ready
+echo "using postgres port 5432"
 nc -z postgres 5432
 n=$?
 while [ $n -ne 0 ]; do
     sleep 1
     nc -z postgres 5432
     n=$?
+    echo "${n}"
 done
 
 echo "Checking Flake8...."

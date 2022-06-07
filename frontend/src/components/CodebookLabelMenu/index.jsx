@@ -1,5 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 import { Button, ButtonGroup, Modal } from "react-bootstrap";
 
 const CODEBOOK_URL = window.CODEBOOK_URL;

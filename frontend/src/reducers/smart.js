@@ -1,7 +1,7 @@
-import { handleActions } from 'redux-actions';
-import update from 'immutability-helper';
+import { handleActions } from "redux-actions";
+import update from "immutability-helper";
 
-import { SET_AVAILABLE, SET_ADMIN_COUNTS } from '../actions/smart';
+import { SET_AVAILABLE, SET_ADMIN_COUNTS } from "../actions/smart";
 
 const initialState = {
     adminTabsAvailable: false,

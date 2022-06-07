@@ -1,7 +1,7 @@
-import { handleActions } from 'redux-actions';
-import update from 'immutability-helper';
+import { handleActions } from "redux-actions";
+import update from "immutability-helper";
 
-import { SET_UNLABELED_DATA, SET_LABEL_COUNTS } from '../actions/skew';
+import { SET_UNLABELED_DATA, SET_LABEL_COUNTS } from "../actions/skew";
 
 const initialState = {
     unlabeled_data: [],

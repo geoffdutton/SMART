@@ -18,7 +18,7 @@ services:
     build:
       context: ../../backend/
       dockerfile: docker/Dockerfile.prod
-    image: rti/smart-backend-prod:R_0_0_1
+    image: geoffd/smart-backend-prod:${TAG:-latest}
     restart: always
     depends_on:
       - postgres
@@ -31,7 +31,7 @@ services:
     build:
       context: ../../frontend/
       dockerfile: Dockerfile.prod
-    image: rti/smart-frontend-prod:R_0_0_1
+    image: geoffd/smart-frontend-prod:${TAG:-latest}
     ports:
       - "${EXTERNAL_FRONTEND_PORT:-8080}:8080"
     command: nginx -c /code/nginx.conf -g "daemon off;"

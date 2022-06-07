@@ -7,7 +7,7 @@
  */
 $.ajax({
     method: "GET",
-    url: '/api/label_distribution/' + PROJECT_PK + '/',
+    url: "/api/label_distribution/" + PROJECT_PK + "/",
     success: function (response) {
         nv.addGraph(function() {
             let chart = nv.models.multiBarChart()
@@ -15,7 +15,7 @@ $.ajax({
                 .duration(300)
                 .margin({ bottom: 70, left: 70 })
                 .groupSpacing(0.1)
-                .legendPosition('bottom')
+                .legendPosition("bottom")
             ;
             chart.xAxis
                 .axisLabel("User")
@@ -25,11 +25,11 @@ $.ajax({
             chart.yAxis
                 .axisLabel("Number of Data Annotated")
                 .axisLabelDistance(-5)
-                .tickFormat(d3.format(',.01f'))
+                .tickFormat(d3.format(",.01f"))
             ;
             chart.legend.rightAlign(false);
             chart.noData("Insufficient labeled data -- please code more documents");
-            d3.select('#distribution_chart svg')
+            d3.select("#distribution_chart svg")
                 .datum(response)
                 .call(chart);
             nv.utils.windowResize(chart.update);
@@ -48,8 +48,8 @@ $.ajax({
  *  annotate data.
  */
 $.ajax({
-    method: 'GET',
-    url: '/api/label_timing/' + PROJECT_PK + '/',
+    method: "GET",
+    url: "/api/label_timing/" + PROJECT_PK + "/",
     success: function (response) {
         nv.addGraph(function() {
             let chart = nv.models.boxPlotChart()
@@ -68,10 +68,10 @@ $.ajax({
             chart.yAxis
                 .axisLabel("Time to Label (s)")
                 .axisLabelDistance(-5)
-                .tickFormat(d3.format(','))
+                .tickFormat(d3.format(","))
             ;
             chart.noData("Insufficient labeled data -- please code more documents");
-            d3.select('#timer_chart svg')
+            d3.select("#timer_chart svg")
                 .datum(response.data)
                 .call(chart);
             nv.utils.windowResize(chart.update);
@@ -87,8 +87,8 @@ $(document).ready(function() {
     /*
      *  Activate DataTable script to create the labeled data DataTable
      */
-    $('#labeled_data_table').DataTable({
-        "ajax": '/api/data_coded_table/' + PROJECT_PK + '/',
+    $("#labeled_data_table").DataTable({
+        "ajax": "/api/data_coded_table/" + PROJECT_PK + "/",
         "columns": [
             { "data": "Text", "width": "70%" },
             { "data": "Label", "searchable": false, "width": "15%" },
@@ -100,12 +100,12 @@ $(document).ready(function() {
         },
         "initComplete": function () {
             let $this = $(this);
-            $this.css({ 'table-layout':'fixed' });
-            $this.find('tr td:first-child').addClass('showData');
-            window.dispatchEvent(new Event('resize'));
+            $this.css({ "table-layout":"fixed" });
+            $this.find("tr td:first-child").addClass("showData");
+            window.dispatchEvent(new Event("resize"));
         },
         "rowCallback": function (row) {
-            $('td:nth-child(1)', row).addClass('showData');
+            $("td:nth-child(1)", row).addClass("showData");
         }
     });
 });
