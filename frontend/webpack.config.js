@@ -1,16 +1,14 @@
-/* eslint-disable */
-var webpack = require("webpack");
-var path = require("path");
+/* eslint-env node */
+const webpack = require("webpack");
+const path = require("path");
 
-var release = process.env.NODE_ENV === "production";
+const release = process.env.NODE_ENV === "production";
 
-var { CleanWebpackPlugin } = require("clean-webpack-plugin");
-var MiniCssExtractPlugin = require("mini-css-extract-plugin");
-var OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-var StyleLintPlugin = require("stylelint-webpack-plugin");
-var BundleTracker = require("webpack-bundle-tracker");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const StyleLintPlugin = require("stylelint-webpack-plugin");
 
-var config = {
+const config = {
     context: path.join(__dirname, "src"),
     devtool: "source-map",
     mode: "development",
@@ -82,11 +80,11 @@ var config = {
                         loader: "expose-loader",
                         options: {
                             exposes: [{
-                              globalName: "$",
-                              override: true,
-                            },{
-                              globalName: "jQuery",
-                              override: true,
+                                globalName: "$",
+                                override: true,
+                            }, {
+                                globalName: "jQuery",
+                                override: true,
                             }]
                         }
                     }
@@ -131,10 +129,6 @@ var config = {
         filename: "[name].[chunkhash].js"
     },
     plugins: [
-        new BundleTracker({
-            path: path.resolve(__dirname),
-            filename: "webpack-stats.json"
-        }),
         new StyleLintPlugin({
             context: "/code/src/styles"
         }),
@@ -164,31 +158,22 @@ if (release) {
             PRODUCTION: true,
             "process.env.NODE_ENV": JSON.stringify("production")
         }),
-        new OptimizeCssAssetsPlugin({
-            cssProcessor: require("cssnano"),
-            cssProcessorOptions: {
-                discardComments: {
-                    removeAll: true
-                }
-            },
-            canPrint: false
-        }),
         new webpack.optimize.AggressiveMergingPlugin(),
-        new webpack.optimize.OccurrenceOrderPlugin(),
-        new webpack.optimize.UglifyJsPlugin({
-            mangle: true,
-            compress: {
-                warnings: false,
-                pure_getters: true,
-                unsafe_comps: true,
-                screw_ie8: true
-            },
-            output: {
-                comments: false
-            },
-            exclude: [/\.min\.js$/gi],
-            sourceMap: true
-        }),
+        // new webpack.optimize.OccurrenceOrderPlugin(),
+        // new webpack.optimize.UglifyJsPlugin({
+        //     mangle: true,
+        //     compress: {
+        //         warnings: false,
+        //         pure_getters: true,
+        //         unsafe_comps: true,
+        //         screw_ie8: true
+        //     },
+        //     output: {
+        //         comments: false
+        //     },
+        //     exclude: [/\.min\.js$/gi],
+        //     sourceMap: true
+        // }),
         new webpack.LoaderOptionsPlugin({
             minimize: true,
             debug: false
