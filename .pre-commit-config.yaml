@@ -1,3 +1,4 @@
+repos:
 - repo: local
   hooks:
     - id: isort
@@ -27,6 +28,6 @@
     - id: eslint-js
       name: eslint-js
       pass_filenames: false
-      entry: docker-compose -f docker-compose.yml run --rm smart_frontend yarn lint
+      entry: docker-compose -f docker-compose.yml run --rm smart_frontend npm run lint
       language: system
       types: [javascript]
