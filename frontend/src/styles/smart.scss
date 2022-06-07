@@ -240,9 +240,13 @@ li.disabled {
 
 @keyframes spin {
 
-    0% { transform: rotate(0deg); }
+    0% {
+        transform: rotate(0deg);
+    }
 
-    100% { transform: rotate(360deg); }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 #progressBar {
@@ -321,13 +325,13 @@ li.disabled {
 
 .panel-heading .accordion-toggle:after {
     font-family: Glyphicons Halflings;
-    content: '\e114';    /* adjust as needed, taken from bootstrap.css */
-    float: right;        /* adjust as needed */
-    color: grey;         /* adjust as needed */
+    content: '\e114'; /* adjust as needed, taken from bootstrap.css */
+    float: right; /* adjust as needed */
+    color: grey; /* adjust as needed */
 }
 
 .panel-heading .accordion-toggle.collapsed:after {
-    content: '\e080';    /* adjust as needed, taken from bootstrap.css */
+    content: '\e080'; /* adjust as needed, taken from bootstrap.css */
 }
 
 .no-overflow {
@@ -347,7 +351,7 @@ li.disabled {
     height: 350px;
 }
 
-#al_tab .invisible{
+#al_tab .invisible {
     visibility: hidden;
 }
 

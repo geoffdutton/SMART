@@ -10,13 +10,11 @@
         @media (min-width: $breakpoint-small) {
             @content;
         }
-    }
-    @else if $point == large {
+    } @else if $point == large {
         @media (min-width: $breakpoint-medium) {
             @content;
         }
-    }
-    @else if $point == xlarge {
+    } @else if $point == xlarge {
         @media (min-width: $breakpoint-large) {
             @content;
         }
