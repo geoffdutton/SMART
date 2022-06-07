@@ -6,7 +6,6 @@ const release = process.env.NODE_ENV === "production";
 
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const StyleLintPlugin = require("stylelint-webpack-plugin");
 const BundleTracker = require("webpack-bundle-tracker");
 
 const DEV_SERVER_PORT = 3005;
@@ -27,7 +26,10 @@ const config = {
     },
     devServer: {
         port: DEV_SERVER_PORT,
-        hot: true
+        hot: true,
+        headers: {
+            "Access-Control-Allow-Origin": "*",
+        },
     },
     module: {
         rules: [
@@ -139,9 +141,6 @@ const config = {
             DEBUG: release,
             PRODUCTION: release,
             "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV || "development")
-        }),
-        new StyleLintPlugin({
-            context: "/code/src/styles"
         }),
         new MiniCssExtractPlugin({ filename: "[name].[contenthash].css" }),
         new webpack.ProvidePlugin({
