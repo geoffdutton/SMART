@@ -34,7 +34,8 @@ const config = {
             {
                 test: /\.jsx?$/,
                 exclude: /node_modules/,
-                use: ["babel-loader", "eslint-loader"]
+                // use: ["babel-loader", "eslint-loader"] -> npm i -D "eslint-loader": "^4.0.2"
+                use: ["babel-loader"]
             },
             {
                 test: /\.css$/,
