@@ -1,0 +1,19 @@
+# Dev configuration
+services:
+  celery_worker:
+    volumes:
+      - ./backend:/code
+      - smart_data:/data/
+    build:
+      context: backend
+      dockerfile: Dockerfile
+    image: geoffd/smart-backend:dev
+    depends_on:
+      - postgres
+      - redis
+      - smart_backend
+    command: ./runcelery.sh
+
+volumes:
+  smart_pgdata:
+  smart_data:

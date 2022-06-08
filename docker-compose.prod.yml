@@ -1,16 +1,4 @@
-version: '2'
-
 services:
-#  postgres:
-#    extends:
-#      file: ../docker-common.yml
-#      service: postgres
-
-#  redis:
-#    extends:
-#      file: ../docker-common.yml
-#      service: redis
-
   smart_backend:
     build:
       context: backend
