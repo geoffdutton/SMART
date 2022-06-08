@@ -9,6 +9,7 @@ import { getDiscarded } from "./recycleBin";
 
 export const SET_ADMIN_DATA = "SET_ADMIN_DATA";
 export const SET_DISCARDED_DATA = "SET_DISCARDED_DATA";
+export const SET_ADMIN_COUNTS = "SET_ADMIN_COUNTS";
 
 export const set_admin_data = createAction(SET_ADMIN_DATA);
 export const set_discarded_data = createAction(SET_DISCARDED_DATA);
