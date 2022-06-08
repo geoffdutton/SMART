@@ -60,16 +60,19 @@ defusedxml==0.7.1
     # via python3-openid
 distlib==0.3.3
     # via virtualenv
+dj-rest-auth==2.2.4
+    # via -r requirements.in
 django==3.2.9
     # via
     #   -r requirements.in
+    #   dj-rest-auth
     #   django-allauth
     #   django-configurations
     #   django-extensions
     #   django-formtools
     #   django-postgres-stats
-    #   django-rest-auth
     #   djangorestframework
+    #   djangorestframework-simplejwt
 django-allauth==0.46.0
     # via -r requirements.in
 django-celery-results==2.2.0
@@ -82,17 +85,16 @@ django-formtools==2.3
     # via -r requirements.in
 django-postgres-stats==1.0.0
     # via -r requirements.in
-django-rest-auth==0.9.5
-    # via -r requirements.in
 django-rest-swagger==2.2.0
     # via -r requirements.in
 django-webpack-loader==1.4.1
     # via -r requirements.in
 djangorestframework==3.12.4
     # via
-    #   django-rest-auth
+    #   dj-rest-auth
     #   django-rest-swagger
-djangorestframework-jwt==1.11.0
+    #   djangorestframework-simplejwt
+djangorestframework-simplejwt==5.2.0
     # via -r requirements.in
 docformatter==1.4
     # via -r requirements.in
@@ -180,7 +182,7 @@ pyflakes==2.4.0
 pyjwt[crypto]==1.7.1
     # via
     #   django-allauth
-    #   djangorestframework-jwt
+    #   djangorestframework-simplejwt
 pyparsing==2.4.7
     # via packaging
 pytest==6.2.5
@@ -225,7 +227,6 @@ simplejson==3.17.6
 six==1.16.0
     # via
     #   click-repl
-    #   django-rest-auth
     #   patsy
     #   python-dateutil
     #   virtualenv

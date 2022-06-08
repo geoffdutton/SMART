@@ -4,13 +4,13 @@ Django
 django-allauth
 django-configurations
 django-extensions
-django-rest-auth
+dj-rest-auth
 django-celery-results
 django-postgres-stats
 django-formtools
 django-rest-swagger
 django-webpack-loader
-djangorestframework-jwt
+djangorestframework-simplejwt
 openpyxl
 pandas
 redis==3.5.3
