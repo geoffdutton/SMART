@@ -2,6 +2,7 @@
   "private": true,
   "scripts": {
     "build": "webpack",
+    "build:prod": "NODE_ENV=production webpack --mode=production",
     "serve": "webpack serve",
     "dev": "npm run manage.py runserver",
     "lint": "npm run lint:js && npm run lint:css",
@@ -9,7 +10,7 @@
     "lint:js": "eslint --ext .js,.jsx src/",
     "manage.py": "python django/smart/manage.py",
     "postbuildoriginal": "rm -rf /var/www/dist/ && cp -r /code/dist /var/www/dist/ && cp /code/webpack-stats.json /var/www/webpack-stats.json",
-    "start": "node server.js",
+    "start": "npm run build:prod && node server.js",
     "test": "babel-node tests/index.js"
   },
   "dependencies": {
@@ -17,6 +18,7 @@
     "bootstrap-sass": "^3.4.3",
     "chai": "^4.3.6",
     "classnames": "^2.3.1",
+    "cors": "^2.8.5",
     "d3": "^3.5.1",
     "datatables.net": "^1.12.1",
     "datatables.net-bs": "^1.12.1",

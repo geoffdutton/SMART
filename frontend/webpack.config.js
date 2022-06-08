@@ -79,7 +79,7 @@ const config = {
                         options: {
                             sourceMap: true,
                             sassOptions: {
-                                outputStyle: release ? "compress" : "expanded"
+                                outputStyle: release ? "compressed" : "expanded"
                             }
                         }
                     }
