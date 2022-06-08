@@ -3,12 +3,12 @@ from io import StringIO
 
 import numpy as np
 import pandas as pd
-from django import forms
 from django.core.exceptions import ValidationError
 from django.forms.widgets import RadioSelect, Select, Textarea, TextInput
 from pandas.errors import ParserError
 
 from core.utils.util import md5_hash
+from django import forms
 
 from .models import Label, Project, ProjectPermissions
 

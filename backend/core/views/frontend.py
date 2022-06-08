@@ -1,5 +1,4 @@
 import pandas as pd
-from django import forms
 from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.files.storage import FileSystemStorage
@@ -26,6 +25,7 @@ from core.templatetags import project_extras
 from core.utils.util import save_codebook_file, upload_data
 from core.utils.utils_annotate import batch_unassign
 from core.utils.utils_queue import add_queue, find_queue_length
+from django import forms
 
 
 # Projects
