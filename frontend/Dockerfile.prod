@@ -1,9 +1,9 @@
 FROM node:16-alpine
-RUN apt-get update && apt-get install -y nginx
+#RUN apk add --no-cache nginx
 RUN mkdir /code
 WORKDIR /code
 ADD ./package.json .
 ADD ./package-lock.json .
+ADD ./server.js .
 RUN npm install
 ENV NODE_ENV production
-RUN npm run build

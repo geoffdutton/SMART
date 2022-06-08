@@ -4,5 +4,5 @@ RUN mkdir /code
 WORKDIR /code
 ADD ./package.json .
 ADD ./package-lock.json .
+ADD ./server.js .
 RUN npm install
-

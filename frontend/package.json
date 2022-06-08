@@ -9,6 +9,7 @@
     "lint:js": "eslint --ext .js,.jsx src/",
     "manage.py": "python django/smart/manage.py",
     "postbuildoriginal": "rm -rf /var/www/dist/ && cp -r /code/dist /var/www/dist/ && cp /code/webpack-stats.json /var/www/webpack-stats.json",
+    "start": "node server.js",
     "test": "babel-node tests/index.js"
   },
   "dependencies": {
@@ -19,6 +20,7 @@
     "d3": "^3.5.1",
     "datatables.net": "^1.12.1",
     "datatables.net-bs": "^1.12.1",
+    "express": "^4.18.1",
     "glob": "^8.0.3",
     "immutability-helper": "^3.1.1",
     "moment": "^2.29.3",
