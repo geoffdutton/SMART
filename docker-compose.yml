@@ -39,7 +39,7 @@ services:
     command: npm run serve
     volumes:
       - ./frontend:/code
-      - /code/node_modules
+      #- /code/node_modules
 
   celery_worker:
     volumes:
