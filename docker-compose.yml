@@ -20,11 +20,10 @@ services:
       - "${EXTERNAL_BACKEND_PORT:-8000}:8000"
     build:
       context: backend
-      dockerfile: docker/Dockerfile
+      dockerfile: Dockerfile
     image: geoffd/smart-backend:${TAG:-latest}
     volumes:
-      - ./backend/django:/code
-      - ./backend/docker:/code/docker
+      - ./backend:/code
       - ./frontend:/code/frontend
       - smart_data:/data/
     depends_on:
@@ -39,16 +38,16 @@ services:
     image: geoffd/smart-frontend:${TAG:-latest}
     command: npm run serve
     volumes:
-      - ./frontend/:/code
+      - ./frontend:/code
       - /code/node_modules
 
   celery_worker:
     volumes:
-      - ./backend/django:/code
+      - ./backend:/code
       - smart_data:/data/
     build:
       context: backend
-      dockerfile: docker/Dockerfile
+      dockerfile: Dockerfile
     image: geoffd/smart-backend:dev
     depends_on:
       - postgres

@@ -17,7 +17,7 @@ services:
       service: smart_backend
     build:
       context: ../../backend/
-      dockerfile: docker/Dockerfile.prod
+      dockerfile: ../../Dockerfile.prod
     image: geoffd/smart-backend-prod:${TAG:-latest}
     restart: always
     depends_on:
