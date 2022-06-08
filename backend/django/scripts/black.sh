@@ -7,10 +7,10 @@ set -euo pipefail
 IFS=$'\n\t'
 
 if [[ $* == --format ]]; then
-  black -t py36 /code/
+  black -t py36 --exclude='frontend' /code/
 else
   set +e
-  black -t py36 --check /code/
+  black -t py36 --exclude='frontend' --check /code/
   exitcode=$?
   set -e
 
