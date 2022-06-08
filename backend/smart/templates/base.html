@@ -1,4 +1,5 @@
 {% load render_bundle from webpack_loader %}
+{% load webpack_static from webpack_loader %}
 {% load project_extras %}
 <!doctype html>
 <html lang="en">
@@ -15,7 +16,7 @@
       content="Smarter Manual Annotation for Resource-constrained collection of Training data (SMART) is a tool that leverages elements of active learning, gamification, and UI/UX design to help data scientists and researchers reduce manual coding time and effort, making machine learning classification tasks more affordable and widely accessible." />
     <link href="https://fonts.googleapis.com/css?family=Lato|Roboto+Slab" rel="stylesheet">
     {% load static %}
-    <link rel="icon" href="{% static 'SMART_logo32x32_bw.ico' %}?v=2" type="image/x-icon" />
+    <link rel="icon" crossorigin="anonymous" href="{% webpack_static 'SMART_logo32x32_bw.ico' %}?v=2" type="image/x-icon" />
     <title>{% block page_title %}{% endblock %}</title>
     {% render_bundle 'smart' 'css' %}
     {% block scripts_head %}{% endblock %}
@@ -23,7 +24,7 @@
 
 <body>
     <header>
-        <a href="/backend/smart/static"><img src="{% static 'SMART-logo_shadow_white_horz.png' %}" id="logo"></a>
+        <a href="/backend/smart/static"><img crossorigin="anonymous" src="{% webpack_static 'SMART-logo_shadow_white_horz.png' %}" id="logo"></a>
         {% if user.is_authenticated %}
         <div class="margin-left">
             {% if project.pk %}

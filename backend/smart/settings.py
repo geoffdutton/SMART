@@ -195,8 +195,8 @@ class Dev(Configuration):
 
     STATICFILES_DIRS = [
         os.path.join(BASE_DIR, "frontend", "dist"),
-        os.path.join(BASE_DIR, "core/data"),
-        os.path.join(BASE_DIR, "smart/static"),
+        os.path.join(BASE_DIR, "core", "data"),
+        # os.path.join(BASE_DIR, "smart", "static"),
         "/data/code_books/",
     ]
 
@@ -216,4 +216,4 @@ class Dev(Configuration):
 
 class Prod(Dev):
     DEBUG = False
-    ALLOWED_HOSTS = []
+    # ALLOWED_HOSTS = ['localhost', '127.0.0.1']

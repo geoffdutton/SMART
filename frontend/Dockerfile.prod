@@ -6,4 +6,3 @@ ADD ./package.json .
 ADD ./package-lock.json .
 ADD ./server.js .
 RUN npm install
-ENV NODE_ENV production

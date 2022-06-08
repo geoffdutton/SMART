@@ -13,8 +13,8 @@ services:
     build:
       context: frontend
       dockerfile: Dockerfile.prod
-#    ports:
-#      - "${EXTERNAL_FRONTEND_PORT:-3005}:3005"
+    environment:
+      - NODE_ENV=production
     command: npm start
 
 volumes:

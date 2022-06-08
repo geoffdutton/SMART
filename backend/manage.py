@@ -5,6 +5,8 @@ import sys
 if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "smart.settings")
     os.environ.setdefault("DJANGO_CONFIGURATION", "Dev")
+    env_var_val = os.environ.get("DJANGO_CONFIGURATION")
+    print(f"\nenv var DJANGO_CONFIGURATION = {env_var_val}\n")
 
     try:
         from configurations.management import execute_from_command_line

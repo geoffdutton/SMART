@@ -1,0 +1,5 @@
+Moved these files to frontend/src/images/ and import them in frontend/src/globals.js
+
+This way all static resources are generated in the frontend.
+
+When run with the django Prod config, the logo and favicon we're throwing 404 errors.

@@ -3,6 +3,7 @@ const webpack = require("webpack");
 const path = require("path");
 
 const release = process.env.NODE_ENV === "production";
+console.log("process.env.NODE_ENV", process.env.NODE_ENV);
 
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -103,7 +104,7 @@ const config = {
                 ]
             },
             {
-                test: /\.(jpe?g|gif|html)$/,
+                test: /\.(jpe?g|gif|html|ico)$/,
                 use: [
                     {
                         loader: "file-loader",

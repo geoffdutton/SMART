@@ -36,6 +36,8 @@ services:
     ports:
       - "3005:3005"
     image: geoffd/smart-frontend:${TAG:-latest}
+    environment:
+      - NODE_ENV=development
     command: npm run serve
     volumes:
       - ./frontend:/code
