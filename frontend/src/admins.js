@@ -1,6 +1,6 @@
 import $ from "jquery";
 import dt from "datatables.net-bs";
-import "bootstrap";
+import "bootstrap-sass/assets/javascripts/bootstrap/tooltip";
 dt(window, $);
 
 /* eslint-disable no-unused-vars */
