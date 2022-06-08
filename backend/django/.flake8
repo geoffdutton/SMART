@@ -1,5 +1,0 @@
-[flake8]
-exclude =
-    manage.py
-    frontend
-ignore = E501,W503,E203,W605,E231
