@@ -20,7 +20,7 @@ services:
       - "${EXTERNAL_BACKEND_PORT:-8000}:8000"
     build:
       context: backend
-      dockerfile: backend/docker/Dockerfile
+      dockerfile: docker/Dockerfile
     image: geoffd/smart-backend:${TAG:-latest}
     volumes:
       - ./backend/django:/code
@@ -48,7 +48,7 @@ services:
       - smart_data:/data/
     build:
       context: backend
-      dockerfile: backend/docker/Dockerfile
+      dockerfile: docker/Dockerfile
     image: geoffd/smart-backend:dev
     depends_on:
       - postgres
