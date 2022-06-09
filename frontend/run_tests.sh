@@ -12,4 +12,4 @@ else
   echo "ESLint Styling Good. Running Tests..."
 fi
 
-yarn run test
+npm run test
