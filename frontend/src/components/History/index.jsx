@@ -100,9 +100,11 @@ class History extends React.Component {
             return (
                 <div>
                     <u>Background Data</u>
+
                     {row.row["metadata"].map(val => (
                         <p key={val}>{val}</p>
                     ))}
+
                     <u>Text to Label</u>
                 </div>
             );
@@ -121,7 +123,9 @@ class History extends React.Component {
             subComponent = (
                 <div className="sub-row">
                     {this.getText(row)}
+
                     <p>{row.row.data}</p>
+
                     <ButtonToolbar variant="btn-toolbar pull-right">
                         {labels.length > 5 ? (
                             <Select
@@ -148,6 +152,7 @@ class History extends React.Component {
                                 )}
                             </React.Fragment>
                         )}
+
                         <OverlayTrigger
                             placement="top"
                             overlay={
@@ -176,6 +181,7 @@ class History extends React.Component {
             subComponent = (
                 <div className="sub-row">
                     <p>{row.row.data}</p>
+
                     <Alert variant="warning" transition={false}>
                         <strong>Note:</strong>
                         This is Inter-rater Reliability data and is not
@@ -202,19 +208,24 @@ class History extends React.Component {
         return (
             <div>
                 <h3>Instructions</h3>
+
                 <p>This page allows a coder to change past labels.</p>
+
                 <p>
                     To annotate, click on a data entry below and select the
                     label from the expanded list of labels. The chart will then
                     update with the new label and current timestamp{" "}
                 </p>
+
                 <p>
                     <strong>NOTE:</strong> Data labels that are changed on this
                     page will not effect past model accuracy or data selected by
                     active learning in the past. The training data will only be
                     updated for the next run of the model
                 </p>
+
                 <CodebookLabelMenuContainer />
+
                 <ReactTable
                     data={history_data}
                     columns={COLUMNS}

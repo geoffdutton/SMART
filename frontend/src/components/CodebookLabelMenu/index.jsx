@@ -33,6 +33,7 @@ class CodebookLabelMenu extends React.Component {
                             {labels.map( (label) => (
                                 <li className="list-group-item" key={label.pk}>
                                     <dt>{label.name}</dt>
+
                                     <dd>{label.description}</dd>
                                 </li>
                             ))}
@@ -55,6 +56,7 @@ class CodebookLabelMenu extends React.Component {
                     <Modal.Header closeButton>
                         <Modal.Title>Codebook</Modal.Title>
                     </Modal.Header>
+
                     <Modal.Body>
                         <embed
                             type="application/pdf"
@@ -98,10 +100,13 @@ class CodebookLabelMenu extends React.Component {
                 <div className="row" id="label_group_buttons">
                     <ButtonGroup className="pull-left">
                         {label_button}
+
                         {codebook_button}
                     </ButtonGroup>
                 </div>
+
                 {this.getLabels(labels, this.state.labels_open)}
+
                 {codebook_module}
             </div>
         );

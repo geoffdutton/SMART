@@ -26,9 +26,11 @@ class DataCard extends React.Component {
             return (
                 <div>
                     <u>Background Data</u>
+
                     {card.text["metadata"].map(val => (
                         <p key={val}>{val}</p>
                     ))}
+
                     <u>Text to Label</u>
                 </div>
             );
@@ -51,8 +53,11 @@ class DataCard extends React.Component {
                 <div className="full" key={cards[0].id}>
                     <div className="cardface clearfix">
                         <h2>Card {cards[0].id + 1}</h2>
+
                         {this.getText(cards[0])}
+
                         <p>{cards[0].text["text"]}</p>
+
                         <ButtonToolbar className="btn-toolbar pull-right">
                             {labels.length > 5 ? (
                                 <Select
@@ -91,6 +96,7 @@ class DataCard extends React.Component {
                                     </Button>
                                 ))
                             )}
+
                             <OverlayTrigger
                                 placement="top"
                                 overlay={

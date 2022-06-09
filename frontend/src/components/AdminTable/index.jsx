@@ -22,9 +22,11 @@ class AdminTable extends React.Component {
             return (
                 <div>
                     <u>Background Data</u>
+
                     {row.row["metadata"].map(val => (
                         <p key={val}>{val}</p>
                     ))}
+
                     <u>Text to Label</u>
                 </div>
             );
@@ -61,7 +63,9 @@ class AdminTable extends React.Component {
                 Cell: row => (
                     <div>
                         {this.getText(row)}
+
                         <p id="admin_text">{row.row.data}</p>
+
                         <div id="admin_buttons">
                             <ButtonToolbar variant="btn-toolbar pull-right">
                                 {labels.length > 5 ? (
@@ -105,6 +109,7 @@ class AdminTable extends React.Component {
                                         </Button>
                                     ))
                                 )}
+
                                 <OverlayTrigger
                                     placement="top"
                                     overlay={
@@ -140,12 +145,15 @@ class AdminTable extends React.Component {
         return (
             <div>
                 <h3>Instructions</h3>
+
                 <p>
                     This page allows an admin to label data that was skipped by
                     labelers, or was disagreed upon in inter-rater reliability
                     checks.
                 </p>
+
                 <CodebookLabelMenuContainer />
+
                 <ReactTable
                     data={admin_data}
                     columns={columns}
@@ -153,6 +161,7 @@ class AdminTable extends React.Component {
                     defaultPageSize={1}
                     filterable={false}
                 />
+
                 <style>
                     {
                         "\

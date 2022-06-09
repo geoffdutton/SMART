@@ -49,9 +49,11 @@ class RecycleBin extends React.Component {
             return (
                 <div>
                     <u>Background Data</u>
+
                     {row.row["metadata"].map(val => (
                         <p key={val}>{val}</p>
                     ))}
+
                     <u>Text to Label</u>
                 </div>
             );
@@ -64,7 +66,9 @@ class RecycleBin extends React.Component {
         return (
             <div className="sub-row">
                 {this.getText(row)}
+
                 <p id="disc_text">{row.row.data}</p>
+
                 <div id="disc_buttons">
                     <ButtonToolbar variant="btn-toolbar pull-right">
                         <OverlayTrigger
@@ -95,20 +99,25 @@ class RecycleBin extends React.Component {
         return (
             <div>
                 <h3>Instructions</h3>
+
                 <p>
                     This page displays all data that has been discarded by an
                     admin.
                 </p>
+
                 <p>
                     All data in this table has been removed from the set of
                     unlabeled data to be predicted, and will not be assigned to
                     anyone for labeling.
                 </p>
+
                 <p>
                     To add a datum back into the project, click the Restore
                     button next to the datum.
                 </p>
+
                 <CodebookLabelMenuContainer />
+
                 <ReactTable
                     data={discarded_data}
                     columns={COLUMNS}
