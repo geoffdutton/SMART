@@ -11,7 +11,8 @@ const SmartContainer = (props) => <Smart {...props} />;
 const mapStateToProps = (state) => {
     return {
         adminTabsAvailable: state.smart.adminTabsAvailable,
-        admin_counts: state.smart.admin_counts
+        admin_counts: state.smart.admin_counts,
+        isAdminOrCreator: state.smart.isAdminOrCreator
     };
 };
 

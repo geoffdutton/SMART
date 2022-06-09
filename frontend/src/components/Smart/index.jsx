@@ -146,7 +146,7 @@ class Smart extends React.Component {
 
 Smart.propTypes = {
     adminTabsAvailable: PropTypes.bool,
-    admin_counts: PropTypes.arrayOf(PropTypes.object),
+    admin_counts: PropTypes.object,
     getAdminCounts: PropTypes.func.isRequired
 };
 

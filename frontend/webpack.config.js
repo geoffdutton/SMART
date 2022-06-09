@@ -16,9 +16,10 @@ const config = {
     devtool: "source-map",
     mode: "development",
     output: {
-        publicPath: `http://localhost:${DEV_SERVER_PORT}/static/`,
+        publicPath: "/static/",
+        // publicPath: `http://localhost:${DEV_SERVER_PORT}/static/`,
         path: path.resolve(__dirname, "dist"),
-        filename: "[name].[chunkhash].js"
+        filename: "[name].js" // "[name].[chunkhash].js"
     },
     entry: {
         smart: "./smart.jsx",
@@ -28,9 +29,17 @@ const config = {
     devServer: {
         port: DEV_SERVER_PORT,
         hot: true,
-        headers: {
-            "Access-Control-Allow-Origin": "*",
-        },
+        proxy: {
+            "!/static/**": {
+                // django server
+                target: "http://localhost:8099",
+                changeOrigin: true
+            }
+        }
+        // historyApiFallback: true,
+        // headers: {
+        //     "Access-Control-Allow-Origin": "*",
+        // },
     },
     module: {
         rules: [
@@ -143,7 +152,10 @@ const config = {
             PRODUCTION: release,
             "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV || "development")
         }),
-        new MiniCssExtractPlugin({ filename: "[name].[contenthash].css" }),
+        new MiniCssExtractPlugin({
+            // filename: "[name].[contenthash].css"
+            filename: "[name].css"
+        }),
         new webpack.ProvidePlugin({
             $: "jquery",
             jQuery: "jquery",

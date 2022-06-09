@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+import "bootstrap-sass/assets/javascripts/bootstrap";
 import "./images/SMART-logo_shadow_white_horz.png";
 import "./images/SMART_logo32x32_bw.ico";
 import "./utils/jquery.formset.js";
