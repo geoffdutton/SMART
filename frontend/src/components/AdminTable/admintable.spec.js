@@ -4,7 +4,6 @@ import { renderWithStore } from "#test-utils";
 import createSmartStore from "@/store";
 import AdminTable from "./index";
 
-
 const initialState = {
     smart: {
         adminTabsAvailable: false,

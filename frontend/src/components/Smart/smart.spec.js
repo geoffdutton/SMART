@@ -1,23 +1,30 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import createSmartStore from "@/store";
+import { renderWithStore } from "#test-utils";
 import Smart from "./index";
 
-describe("<Smart />", () => {
+const initialState = undefined;
+
+describe.skip("<Smart />", () => {
+    /** @type {import('redux').Store} */
+    let store;
     let comp;
     let adminCounts;
     beforeEach(() => {
-        adminCounts = [];
+        store = createSmartStore(initialState);
+        adminCounts = {};
     });
 
     it("renders properly if all props provided", () => {
         const fn = () => {};
-        comp = render(
+        comp = renderWithStore(
             <Smart
                 adminTabsAvailable = {false}
                 getAdminTabsAvailable = {fn}
                 admin_counts = {adminCounts}
                 getAdminCounts = {fn}
-            />
+            />,
+            { store }
         );
         expect(comp).not.toBeNull();
     });
