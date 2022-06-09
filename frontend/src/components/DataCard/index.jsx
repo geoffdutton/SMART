@@ -9,14 +9,12 @@ import {
 } from "react-bootstrap";
 import Select from "react-dropdown-select";
 
-const ADMIN = window.ADMIN;
-
 class DataCard extends React.Component {
     componentDidMount() {
         //Don't fetch cards unless you don't have any
         //NOTE: otherwise it appends the same cards
         //to the current list again.
-        if (this.props.cards.length == 0) {
+        if (this.props.cards.length === 0) {
             this.props.fetchCards();
         }
     }
@@ -38,14 +36,16 @@ class DataCard extends React.Component {
     }
 
     render() {
+        // @TODO: move this state?
+        const ADMIN = window.ADMIN;
         let card;
         const { labels, message, cards, passCard, annotateCard } = this.props;
 
-        let labelsOptions = labels.map(label =>
+        const labelsOptions = labels.map(label =>
             Object.assign(label, { value: label["pk"] })
         );
 
-        if (!(cards === undefined) && cards.length > 0) {
+        if (cards.length > 0) {
             //just get the labels from the cards
             card = (
                 <div className="full" key={cards[0].id}>
@@ -114,7 +114,7 @@ class DataCard extends React.Component {
                 </div>
             );
         } else {
-            let blankDeckMessage = message
+            const blankDeckMessage = message
                 ? message
                 : "No more data to label at this time. Please check back later";
             card = <Card body>{blankDeckMessage}</Card>;

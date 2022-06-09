@@ -13,7 +13,7 @@ export const set_label_counts = createAction(SET_LABEL_COUNTS);
 
 //Get the data for the skew table
 export const getUnlabeled = (projectID) => {
-    let apiURL = `/api/data_unlabeled_table/${projectID}/`;
+    const apiURL = `/api/data_unlabeled_table/${projectID}/`;
     return dispatch => {
         return fetch(apiURL, getConfig())
             .then(response => {
@@ -28,7 +28,7 @@ export const getUnlabeled = (projectID) => {
             .then(response => {
                 // If error was in the response then set that message
                 if ("error" in response) console.log(response);
-                let all_data = [];
+                const all_data = [];
                 for (let i = 0; i < response.data.length; i++) {
                     const row = {
                         id: response.data[i].ID,
@@ -45,7 +45,7 @@ export const getUnlabeled = (projectID) => {
 
 //get the data for the skew graph
 export const getLabelCounts = (projectID) => {
-    let apiURL = `/api/label_distribution_inverted/${projectID}/`;
+    const apiURL = `/api/label_distribution_inverted/${projectID}/`;
     return dispatch => {
         return fetch(apiURL, getConfig())
             .then(response => {
@@ -65,11 +65,11 @@ export const getLabelCounts = (projectID) => {
 };
 
 export const skewLabel = (dataID, labelID, projectID) => {
-    let payload = {
+    const payload = {
         labelID: labelID,
         labeleing_time: null
     };
-    let apiURL = `/api/label_skew_label/${dataID}/`;
+    const apiURL = `/api/label_skew_label/${dataID}/`;
     return dispatch => {
         return fetch(apiURL, postConfig(payload))
             .then(response => {

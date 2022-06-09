@@ -51,8 +51,8 @@ if (PROJECT_CLASSIFIER !== "None") {
                         console.log(error);
                     }
                 });
-                let choice = $(this).val();
-                let children = $("#model_metrics").children();
+                const choice = $(this).val();
+                const children = $("#model_metrics").children();
                 if (choice === "accuracy") {
                     $("#model_metrics").text("Model Metrics: Accuracy ");
                     $("#model_metrics").append(children);
@@ -114,7 +114,7 @@ $(document).ready(function() {
                 "sEmptyTable": "Insufficient training data -- please code more documents"
             },
             "initComplete": function () {
-                let $this = $(this);
+                const $this = $(this);
                 $this.css({ "table-layout":"fixed" });
                 $this.find("tr td:first-child").addClass("showData");
                 window.dispatchEvent(new Event("resize"));

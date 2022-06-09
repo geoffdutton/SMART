@@ -11,7 +11,7 @@ export const set_discarded_data = createAction(SET_DISCARDED_DATA);
 
 //take data out of the recycle bin
 export const restoreData = (dataID, projectID) => {
-    let apiURL = `/api/restore_data/${dataID}/`;
+    const apiURL = `/api/restore_data/${dataID}/`;
     return dispatch => {
         return fetch(apiURL, postConfig())
             .then(response => {
@@ -36,7 +36,7 @@ export const restoreData = (dataID, projectID) => {
 
 //get the discarded data for the recycle bin table
 export const getDiscarded = (projectID) => {
-    let apiURL = `/api/recycle_bin_table/${projectID}/`;
+    const apiURL = `/api/recycle_bin_table/${projectID}/`;
     return dispatch => {
         return fetch(apiURL, getConfig())
             .then(response => {
@@ -51,7 +51,7 @@ export const getDiscarded = (projectID) => {
             .then(response => {
             // If error was in the response then set that message
                 if ("error" in response) console.log(response);
-                let all_data = [];
+                const all_data = [];
                 for (let i = 0; i < response.data.length; i++) {
                     const row = {
                         id: response.data[i].ID,

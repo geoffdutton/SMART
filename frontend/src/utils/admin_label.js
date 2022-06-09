@@ -10,7 +10,7 @@ $.ajax({
     url: "/api/label_distribution/" + PROJECT_PK + "/",
     success: function (response) {
         nv.addGraph(function() {
-            let chart = nv.models.multiBarChart()
+            const chart = nv.models.multiBarChart()
                 .color(["#66c2a5", "#fc8d62", "#8da0cb", "#e78ac3", "#a6d854", "#ffd92f", "#e5c494", "#b3b3b3"])
                 .duration(300)
                 .margin({ bottom: 70, left: 70 })
@@ -52,7 +52,7 @@ $.ajax({
     url: "/api/label_timing/" + PROJECT_PK + "/",
     success: function (response) {
         nv.addGraph(function() {
-            let chart = nv.models.boxPlotChart()
+            const chart = nv.models.boxPlotChart()
                 .x(function (d) {
                     return d.label;
                 })
@@ -99,7 +99,7 @@ $(document).ready(function() {
             "sEmptyTable": "Insufficient labeled data -- please code more documents"
         },
         "initComplete": function () {
-            let $this = $(this);
+            const $this = $(this);
             $this.css({ "table-layout":"fixed" });
             $this.find("tr td:first-child").addClass("showData");
             window.dispatchEvent(new Event("resize"));

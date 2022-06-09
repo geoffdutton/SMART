@@ -1,3 +1,4 @@
+/* eslint-disable */
 /**
  * jQuery Formset 1.3-pre
  * @author Stanislaus Madueke (stan DOT madueke AT gmail DOT com)

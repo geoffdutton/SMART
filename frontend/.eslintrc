@@ -1,7 +1,8 @@
 {
     "env": {
         "browser": true,
-        "es6": true
+        "es6": true,
+        "jest": true
     },
     "extends": [
         "eslint:recommended",
@@ -42,6 +43,7 @@
         "eol-last": ["error", "always"],
         "keyword-spacing": ["error", {"after": true, "before": true}],
         "linebreak-style": ["error", "unix"],
-        "quotes": ["error"]
+        "quotes": ["error"],
+        "prefer-const": ["error"]
     }
 }

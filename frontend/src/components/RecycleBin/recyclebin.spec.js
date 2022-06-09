@@ -1,21 +1,21 @@
-import React, {Component} from 'react';
-import { shallow } from 'enzyme';
-import { assert } from 'chai';
-import RecycleBin from './index';
+import React from "react";
+import { render } from "@testing-library/react";
+import RecycleBin from "./index";
 
-describe('<RecycleBin />', () => {
-    describe('render', () => {
-        it('renders properly if all props provided', () => {
-            const fn = () => {};
-            const data = [];
+describe("<RecycleBin />", () => {
+    let comp;
 
-            const wrapper = shallow(
-                <RecycleBin
-                  getDiscarded = {fn}
-                  discarded_data = {data}
-                  restoreData = {fn}
-                />
-            );
-        });
+    it("renders properly if all props provided", () => {
+        const fn = () => {};
+        const data = [];
+
+        comp = render(
+            <RecycleBin
+                getDiscarded = {fn}
+                discarded_data = {data}
+                restoreData = {fn}
+            />
+        );
+        expect(comp).not.toBeNull();
     });
 });

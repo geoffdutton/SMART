@@ -1,22 +1,24 @@
-import React, { Component } from 'react';
-import { shallow } from 'enzyme';
-import { assert } from 'chai';
-import Smart from './index';
+import React from "react";
+import { render } from "@testing-library/react";
+import Smart from "./index";
 
-describe('<Smart />', () => {
-    describe('render', () => {
-        it('renders properly if all props provided', () => {
-            const fn = () => {};
-            const data = [];
-            const message = "";
-            const wrapper = shallow(
-              <Smart
+describe("<Smart />", () => {
+    let comp;
+    let adminCounts;
+    beforeEach(() => {
+        adminCounts = [];
+    });
+
+    it("renders properly if all props provided", () => {
+        const fn = () => {};
+        comp = render(
+            <Smart
                 adminTabsAvailable = {false}
                 getAdminTabsAvailable = {fn}
-                admin_counts = {data}
+                admin_counts = {adminCounts}
                 getAdminCounts = {fn}
-              />
-            );
-        });
+            />
+        );
+        expect(comp).not.toBeNull();
     });
 });

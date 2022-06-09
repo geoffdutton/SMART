@@ -21,7 +21,7 @@ export const clearDeck = createAction(CLEAR_DECK);
 
 // Create cards by reading from a queue
 export const fetchCards = (projectID) => {
-    let apiURL = `/api/get_card_deck/${projectID}/`;
+    const apiURL = `/api/get_card_deck/${projectID}/`;
     return dispatch => {
         return fetch(apiURL, getConfig())
             .then(response => {
@@ -52,11 +52,11 @@ export const fetchCards = (projectID) => {
 };
 
 export const annotateCard = (card, labelID, num_cards_left, projectID, is_admin) => {
-    let payload = {
+    const payload = {
         labelID: labelID,
         labeling_time: moment().diff(card["start_time"], "seconds") // now - start_time rounded to whole seconds
     };
-    let apiURL = `/api/annotate_data/${card.text.pk}/`;
+    const apiURL = `/api/annotate_data/${card.text.pk}/`;
     return dispatch => {
         return fetch(apiURL, postConfig(payload))
             .then(response => {
@@ -89,7 +89,7 @@ export const annotateCard = (card, labelID, num_cards_left, projectID, is_admin)
 
 //skip a card and put it in the admin table
 export const passCard = (card, num_cards_left, is_admin, projectID ) => {
-    let apiURL = `/api/skip_data/${card.text.pk}/`;
+    const apiURL = `/api/skip_data/${card.text.pk}/`;
     return dispatch => {
         return fetch(apiURL, postConfig())
             .then(response => {

@@ -34,7 +34,7 @@ class AdminTable extends React.Component {
     render() {
         const { admin_data, labels, adminLabel, discardData } = this.props;
 
-        let labelsOptions = labels.map(label =>
+        const labelsOptions = labels.map(label =>
             Object.assign(label, { value: label["pk"] })
         );
 
@@ -131,7 +131,7 @@ class AdminTable extends React.Component {
             }
         ];
 
-        let page_sizes = [1];
+        const page_sizes = [1];
         for (let i = 5; i < admin_data.length; i += 5) {
             page_sizes.push(i);
         }

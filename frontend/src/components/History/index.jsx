@@ -113,7 +113,7 @@ class History extends React.Component {
         let subComponent;
         const { labels, changeLabel, changeToSkip } = this.props;
 
-        let labelsOptions = labels.map(label =>
+        const labelsOptions = labels.map(label =>
             Object.assign(label, { value: label["pk"] })
         );
 
@@ -191,7 +191,7 @@ class History extends React.Component {
     render() {
         const { history_data } = this.props;
 
-        let page_sizes = [1];
+        const page_sizes = [1];
         let counter = 1;
         for (let i = 5; i < history_data.length; i += 5 * counter) {
             page_sizes.push(i);

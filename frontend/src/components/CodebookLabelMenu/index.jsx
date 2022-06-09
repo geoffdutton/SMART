@@ -2,9 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Button, ButtonGroup, Modal } from "react-bootstrap";
 
-const CODEBOOK_URL = window.CODEBOOK_URL;
-
-
 class CodebookLabelMenu extends React.Component {
 
     constructor(props){
@@ -47,10 +44,12 @@ class CodebookLabelMenu extends React.Component {
     }
 
     render() {
+        // @TODO: move to state?
+        const CODEBOOK_URL = window.CODEBOOK_URL;
         const { labels } = this.props;
         let codebook_module, codebook_button, label_button;
 
-        if (CODEBOOK_URL != "") {
+        if (CODEBOOK_URL) {
             codebook_module = (
                 <Modal show={this.state.codebook_open} onHide={this.toggleCodebook}>
                     <Modal.Header closeButton>

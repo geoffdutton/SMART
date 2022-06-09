@@ -1,25 +1,29 @@
-import React, {Component} from 'react';
-import { shallow } from 'enzyme';
-import { assert } from 'chai';
-import Skew from './index';
+import React from "react";
+import { render } from "@testing-library/react";
+import Skew from "./index";
 
-describe('<Skew />', () => {
-    describe('render', () => {
-        it('renders properly if all props provided', () => {
-            const fn = () => {};
-            const data = [];
-            const labels = [];
+describe("<Skew />", () => {
+    let comp;
+    let labels;
+    let labelCounts;
+    beforeEach(() => {
+        labels = [];
+        labelCounts = [];
+    });
 
-            const wrapper = shallow(
-                <Skew
-                  getUnlabeled = {fn}
-                  unlabeled_data={data}
-                  labels={labels}
-                  skewLabel={fn}
-                  getLabelCounts={fn}
-                  label_counts={data}
-                />
-            );
-        });
+    it("renders properly if all props provided", () => {
+        const fn = () => {};
+
+        comp = render(
+            <Skew
+                getUnlabeled = {fn}
+                unlabeled_data={labelCounts}
+                labels={labels}
+                skewLabel={fn}
+                getLabelCounts={fn}
+                label_counts={labelCounts}
+            />
+        );
+        expect(comp).not.toBeNull();
     });
 });

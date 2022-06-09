@@ -17,7 +17,7 @@ export const set_discarded_data = createAction(SET_DISCARDED_DATA);
 
 //get the skipped data for the admin Table
 export const getAdmin = (projectID) => {
-    let apiURL = `/api/data_admin_table/${projectID}/`;
+    const apiURL = `/api/data_admin_table/${projectID}/`;
     return dispatch => {
         return fetch(apiURL, getConfig())
             .then(response => {
@@ -32,7 +32,7 @@ export const getAdmin = (projectID) => {
             .then(response => {
             // If error was in the response then set that message
                 if ("error" in response) console.log(response);
-                let all_data = [];
+                const all_data = [];
                 for (let i = 0; i < response.data.length; i++) {
                     const row = {
                         id: response.data[i].ID,
@@ -49,10 +49,10 @@ export const getAdmin = (projectID) => {
 };
 
 export const adminLabel = (dataID, labelID, projectID) => {
-    let payload = {
+    const payload = {
         labelID: labelID,
     };
-    let apiURL = `/api/label_admin_label/${dataID}/`;
+    const apiURL = `/api/label_admin_label/${dataID}/`;
     return dispatch => {
         return fetch(apiURL, postConfig(payload))
             .then(response => {
@@ -80,7 +80,7 @@ export const adminLabel = (dataID, labelID, projectID) => {
 
 //mark data as uncodable and put it in the recycle bin
 export const discardData = (dataID, projectID) => {
-    let apiURL = `/api/discard_data/${dataID}/`;
+    const apiURL = `/api/discard_data/${dataID}/`;
     return dispatch => {
         return fetch(apiURL, postConfig())
             .then(response => {
