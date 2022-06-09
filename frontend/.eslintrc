@@ -48,6 +48,7 @@
         "linebreak-style": ["error", "unix"],
         "quotes": ["error"],
         "prefer-const": ["error"],
+        "react/jsx-no-leaked-render": ["error"],
         "react/no-invalid-html-attribute": ["error"],
         "react/jsx-newline": ["error"]
     }
