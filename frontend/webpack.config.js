@@ -173,6 +173,10 @@ const config = {
         })
     ],
     resolve: {
+        alias: {
+            "@/": path.resolve(__dirname, "src"),
+            "#test-utils": path.resolve(__dirname, "test-utils.js")
+        },
         extensions: [".js", ".jsx"]
     }
 };
