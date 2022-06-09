@@ -52,7 +52,7 @@ class Dev(Configuration):
         "formtools",
         "dj_rest_auth.registration",
         "rest_framework_swagger",
-        "webpack_loader",
+        # "webpack_loader",
     ]
 
     MIDDLEWARE = [
@@ -146,11 +146,6 @@ class Dev(Configuration):
 
     USE_TZ = True
 
-    # Static files (CSS, JavaScript, Images)
-    # https://docs.djangoproject.com/en/1.11/howto/static-files/
-
-    STATIC_URL = "/dist/"
-
     REST_FRAMEWORK = {
         "PAGE_SIZE": 10,
         "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
@@ -193,23 +188,25 @@ class Dev(Configuration):
     CELERY_TASK_SERIALIZER = "json"
     CELERY_RESULT_SERIALIZER = "json"
 
+    STATIC_URL = "/static/"
+
     STATICFILES_DIRS = [
-        os.path.join(BASE_DIR, "frontend", "dist"),
+        # os.path.join(BASE_DIR, "frontend", "dist"),
         os.path.join(BASE_DIR, "core", "data"),
         # os.path.join(BASE_DIR, "smart", "static"),
         "/data/code_books/",
     ]
 
-    WEBPACK_LOADER = {
-        "DEFAULT": {
-            "CACHE": not DEBUG,
-            "BUNDLE_DIR_NAME": "/",
-            "STATS_FILE": os.path.join(BASE_DIR, "frontend", "webpack-stats.json"),
-            "POLL_INTERVAL": 0.1,
-            "TIMEOUT": None,
-            "IGNORE": [".+\.hot-update.js", ".+\.map"],
-        }
-    }
+    # WEBPACK_LOADER = {
+    #     "DEFAULT": {
+    #         "CACHE": not DEBUG,
+    #         "BUNDLE_DIR_NAME": "/",
+    #         "STATS_FILE": os.path.join(BASE_DIR, "frontend", "webpack-stats.json"),
+    #         "POLL_INTERVAL": 0.1,
+    #         "TIMEOUT": None,
+    #         "IGNORE": [".+\.hot-update.js", ".+\.map"],
+    #     }
+    # }
 
     DATA_UPLOAD_MAX_NUMBER_FIELDS = None
 

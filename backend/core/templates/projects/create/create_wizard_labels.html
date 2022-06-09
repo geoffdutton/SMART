@@ -3,7 +3,6 @@
 
 {% load i18n %}
 {% load static %}
-{% load render_bundle from webpack_loader %}
 
 {% block head %}
 {{ wizard.form.media }}
@@ -86,7 +85,6 @@
   </div>
 </div>
 {% endblock %}
-
 {% block scripts_body %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script>
 <script type="text/javascript">

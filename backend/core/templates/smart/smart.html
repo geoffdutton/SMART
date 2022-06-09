@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block page_title %}Annotate Data{% endblock %}
-{% load render_bundle from webpack_loader %}
+<!--/curlyPercent load render_bundle from webpack_loader curlyPercent/-->
 {% load static %}
 {% block content %}
 <div id="mount"></main>
@@ -18,17 +18,18 @@ window.ADMIN = {{admin}};
 window.onbeforeunload = function (e) {
   $.ajax({
     type: 'GET',
-    async: false,
+    // async: false,
     url: '/api/leave_coding_page/'+{{ pk }}+'/',
   });
 };
 window.onload = function (e) {
   $.ajax({
     type: 'GET',
-    async: false,
+    // async: false,
     url: '/api/enter_coding_page/'+{{ pk }}+'/',
   });
 };
 </script>
-{% render_bundle 'smart' 'js' %}
+<script src="{% static 'smart.js' %}" crossorigin="anonymous" defer></script>
+<!-- /curlyPercent render_bundle 'smart' 'js' curlyPercent/-->
 {% endblock %}

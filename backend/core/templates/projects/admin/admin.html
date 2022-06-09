@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load render_bundle from webpack_loader %}
+<!--#{%# load render_bundle from webpack_loader #%}#-->
 {% load project_extras %}
 
 {% block page_title %}Admin{% endblock %}
@@ -48,5 +48,6 @@ window.PROJECT_CLASSIFIER = "{{ project.classifier }}"
 window.PROJECT_LEARNING_METHOD = "{{ project.learning_method }}"
 window.PROJECT_PERCENTAGE_IRR = {{ project.percentage_irr }}
 </script>
-{% render_bundle 'admins' 'js' %}
+<script src="{% static 'admins.js' %}" crossorigin="anonymous" defer></script>
+<!--#{%# render_bundle 'admins' 'js' #%}#-->
 {% endblock %}
