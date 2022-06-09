@@ -13,6 +13,7 @@
         "$": false,
         "nv": false,
         "d3": false,
+        "fetchMock": false
     },
     "parserOptions": {
         "ecmaVersion": 2018,
