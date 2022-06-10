@@ -20,7 +20,10 @@ describe("<Smart />", () => {
     });
 
     it("renders properly if all props provided", () => {
-        fetchMock.mockAbort();
+        fetchMock.mockResponse(JSON.stringify({
+            data: [],
+            labels: []
+        }));
         const fn = () => {
         };
         comp = renderWithStore(
