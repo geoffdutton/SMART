@@ -1,18 +1,17 @@
-import { createAction } from 'redux-actions';
-import 'whatwg-fetch';
+import { createAction } from "redux-actions";
 
-import { getConfig, postConfig } from '../utils/fetch_configs';
-import { getAdmin } from './adminTables';
-import { getAdminCounts } from './smart';
-import { getLabelCounts } from './skew';
+import { getConfig, postConfig } from "../utils/fetch_configs";
+import { getAdmin } from "./adminTables";
+import { getAdminCounts } from "./smart";
+import { getLabelCounts } from "./skew";
 
-export const SET_HIST_DATA = 'SET_HIST_DATA';
+export const SET_HIST_DATA = "SET_HIST_DATA";
 
 export const set_hist_data = createAction(SET_HIST_DATA);
 
 //Get the data for the history table
 export const getHistory = (projectID) => {
-    let apiURL = `/api/get_label_history/${projectID}/`;
+    const apiURL = `/api/get_label_history/${projectID}/`;
     return dispatch => {
         return fetch(apiURL, getConfig())
             .then(response => {
@@ -26,7 +25,7 @@ export const getHistory = (projectID) => {
             })
             .then(response => {
                 // If error was in the response then set that message
-                let all_data = [];
+                const all_data = [];
                 for (let i = 0; i < response.data.length; i++) {
                     const row = {
                         id: response.data[i].id,
@@ -47,12 +46,12 @@ export const getHistory = (projectID) => {
 
 
 export const changeLabel = (dataID, oldLabelID, labelID, projectID) => {
-    let payload = {
+    const payload = {
         dataID: dataID,
         oldLabelID: oldLabelID,
         labelID: labelID
     };
-    let apiURL = `/api/modify_label/${dataID}/`;
+    const apiURL = `/api/modify_label/${dataID}/`;
     return dispatch => {
         return fetch(apiURL, postConfig(payload))
             .then(response => {
@@ -72,11 +71,11 @@ export const changeLabel = (dataID, oldLabelID, labelID, projectID) => {
 };
 
 export const changeToSkip = (dataID, oldLabelID, projectID) => {
-    let payload = {
+    const payload = {
         dataID: dataID,
         oldLabelID: oldLabelID,
     };
-    let apiURL = `/api/modify_label_to_skip/${dataID}/`;
+    const apiURL = `/api/modify_label_to_skip/${dataID}/`;
     return dispatch => {
         return fetch(apiURL, postConfig(payload))
             .then(response => {

@@ -1,8 +1,8 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from "react";
+import { connect } from "react-redux";
 
-import { getHistory, changeLabel, changeToSkip } from '../actions/history';
-import History from '../components/History';
+import { getHistory, changeLabel, changeToSkip } from "../actions/history";
+import History from "../components/History";
 
 const PROJECT_ID = window.PROJECT_ID;
 

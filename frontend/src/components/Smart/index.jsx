@@ -1,13 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 import { Tabs, Tab, Badge } from "react-bootstrap";
-import CardContainer from '../../containers/card_container';
-import HistoryContainer from '../../containers/history_container';
-import SkewContainer from '../../containers/skew_container';
-import AdminTableContainer from '../../containers/adminTable_container';
-import RecycleBinContainer from '../../containers/recycleBin_container';
-import CodebookLabelMenuContainer from '../../containers/codebookLabelMenu_container';
-import SmartProgressBarContainer from '../../containers/smartProgressBar_container';
+import CardContainer from "../../containers/card_container";
+import HistoryContainer from "../../containers/history_container";
+import SkewContainer from "../../containers/skew_container";
+import AdminTableContainer from "../../containers/adminTable_container";
+import RecycleBinContainer from "../../containers/recycleBin_container";
+import CodebookLabelMenuContainer from "../../containers/codebookLabelMenu_container";
+import SmartProgressBarContainer from "../../containers/smartProgressBar_container";
 
 const ADMIN = window.ADMIN;
 
@@ -57,6 +57,7 @@ class Smart extends React.Component {
                             {admin_counts["IRR"]}
                         </Badge>
                         | Skipped
+
                         <Badge className="tab-badge">
                             {admin_counts["SKIP"]}
                         </Badge>
@@ -127,17 +128,23 @@ class Smart extends React.Component {
                 <Tab eventKey={1} title="Annotate Data" className="full card" transition={false}>
                     <div className="cardContent">
                         <CodebookLabelMenuContainer />
+
                         <SmartProgressBarContainer />
+
                         <CardContainer />
                     </div>
                 </Tab>
+
                 <Tab eventKey={2} title="History" className="full card" transition={false}>
                     <div className="cardContent">
                         <HistoryContainer />
                     </div>
                 </Tab>
+
                 { ADMIN === true && this.renderAdminTabSkew() }
+
                 { ADMIN === true && this.renderAdminTabAdminTable() }
+
                 { ADMIN === true && this.renderAdminTabRecycle() }
             </Tabs>
         );
@@ -146,8 +153,9 @@ class Smart extends React.Component {
 
 Smart.propTypes = {
     adminTabsAvailable: PropTypes.bool,
-    admin_counts: PropTypes.arrayOf(PropTypes.object),
-    getAdminCounts: PropTypes.func.isRequired
+    admin_counts: PropTypes.object,
+    getAdminCounts: PropTypes.func.isRequired,
+    getAdminTabsAvailable: PropTypes.func.isRequired
 };
 
 export default Smart;

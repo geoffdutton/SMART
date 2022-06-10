@@ -1,0 +1,8 @@
+.DS_Store
+
+# Docs
+smart-docs/docs/_build/
+smart-docs/docs/nbuild/
+
+# Landing
+docs/node_modules/

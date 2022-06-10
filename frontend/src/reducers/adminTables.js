@@ -1,7 +1,7 @@
-import { handleActions } from 'redux-actions';
-import update from 'immutability-helper';
+import { handleActions } from "redux-actions";
+import update from "immutability-helper";
 
-import { SET_ADMIN_DATA, SET_ADMIN_COUNTS } from '../actions/adminTables';
+import { SET_ADMIN_DATA, SET_ADMIN_COUNTS } from "../actions/adminTables";
 
 const initialState = {
     admin_data: [],

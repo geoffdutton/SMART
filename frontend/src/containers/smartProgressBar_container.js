@@ -1,7 +1,7 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from "react";
+import { connect } from "react-redux";
 
-import SmartProgressBar from '../components/SmartProgressBar';
+import SmartProgressBar from "../components/SmartProgressBar";
 
 
 const SmartProgressBarContainer = (props) => <SmartProgressBar {...props} />;

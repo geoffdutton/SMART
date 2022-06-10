@@ -1,7 +1,7 @@
-import { handleActions } from 'redux-actions';
-import update from 'immutability-helper';
+import { handleActions } from "redux-actions";
+import update from "immutability-helper";
 
-import { SET_DISCARDED_DATA } from '../actions/recycleBin';
+import { SET_DISCARDED_DATA } from "../actions/recycleBin";
 
 const initialState = {
     discarded_data: [],

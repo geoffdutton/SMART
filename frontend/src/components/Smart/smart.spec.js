@@ -1,22 +1,58 @@
-import React, { Component } from 'react';
-import { shallow } from 'enzyme';
-import { assert } from 'chai';
-import Smart from './index';
+import React from "react";
+import createSmartStore from "@/store";
+import { renderWithStore } from "#test-utils";
+import Smart from "./index";
+import { enableFetchMocks } from "jest-fetch-mock";
 
-describe('<Smart />', () => {
-    describe('render', () => {
-        it('renders properly if all props provided', () => {
-            const fn = () => {};
-            const data = [];
-            const message = "";
-            const wrapper = shallow(
-              <Smart
-                adminTabsAvailable = {false}
-                getAdminTabsAvailable = {fn}
-                admin_counts = {data}
-                getAdminCounts = {fn}
-              />
+enableFetchMocks();
+
+const initialState = undefined;
+
+describe("<Smart />", () => {
+    /** @type {import("redux").Store} */
+    let store;
+    let comp;
+    let adminCounts;
+    beforeEach(() => {
+        fetchMock.resetMocks();
+        store = createSmartStore(initialState);
+        adminCounts = {};
+    });
+
+    it("renders properly if all props provided", () => {
+        fetchMock.mockResponse(JSON.stringify({
+            data: [],
+            labels: []
+        }));
+        const fn = () => {
+        };
+        comp = renderWithStore(
+            <Smart
+                adminTabsAvailable={false}
+                getAdminTabsAvailable={fn}
+                admin_counts={adminCounts}
+                getAdminCounts={fn}
+            />,
+            { store }
+        );
+
+        expect(comp)
+            .not
+            .toBeNull();
+        expect(fetchMock)
+            .toHaveBeenCalledTimes(1);
+
+        expect(fetchMock)
+            .toHaveBeenCalledWith(
+                "/api/get_card_deck/3443/",
+                { credentials: "same-origin",
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                        "X-CSRFToken": null
+                    },
+                    method: "GET"
+                }
             );
-        });
     });
 });

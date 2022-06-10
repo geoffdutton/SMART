@@ -1,20 +1,27 @@
 {
     "env": {
         "browser": true,
-        "es6": true
+        "es6": true,
+        "jest": true
     },
     "extends": [
         "eslint:recommended",
         "plugin:react/recommended"
     ],
+    "settings": {
+        "react": {
+            "version": "16.14"
+        }
+    },
     "globals": {
         "React": false,
         "$": false,
         "nv": false,
         "d3": false,
+        "fetchMock": false
     },
     "parserOptions": {
-        "ecmaVersion": 6,
+        "ecmaVersion": 2018,
         "sourceType": "module",
         "ecmaFeatures": {
             "jsx": true,
@@ -26,9 +33,6 @@
         "no-case-declarations": 0,
         "no-cond-assign": 0,
         "no-unused-vars": 1,
-        "react/display-name": 0,
-        "react/prop-types": 0,
-        "react/no-find-dom-node": 0,
         "brace-style": ["error", "1tbs"],
         "object-curly-spacing": ["error", "always"],
         "space-infix-ops": ["error", {"int32Hint": false}],
@@ -41,6 +45,11 @@
         "newline-per-chained-call": ["error", {"ignoreChainWithDepth": 3}],
         "eol-last": ["error", "always"],
         "keyword-spacing": ["error", {"after": true, "before": true}],
-        "linebreak-style": ["error", "unix"]
+        "linebreak-style": ["error", "unix"],
+        "quotes": ["error"],
+        "prefer-const": ["error"],
+        "react/jsx-no-leaked-render": ["error"],
+        "react/no-invalid-html-attribute": ["error"],
+        "react/jsx-newline": ["error"]
     }
 }

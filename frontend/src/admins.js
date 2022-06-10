@@ -1,6 +1,6 @@
 import $ from "jquery";
 import dt from "datatables.net-bs";
-import "bootstrap";
+import "bootstrap-sass/assets/javascripts/bootstrap/tooltip";
 dt(window, $);
 
 /* eslint-disable no-unused-vars */
@@ -16,7 +16,7 @@ import "./utils/admin_irr.js";
 
 $(document).ready(function() {
     $(function() {
-        $('[data-toggle="tooltip"]').tooltip();
+        $("[data-toggle=\"tooltip\"]").tooltip();
     });
 });
 

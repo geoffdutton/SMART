@@ -1,15 +1,15 @@
-import { createAction } from 'redux-actions';
-import 'whatwg-fetch';
+import { createAction } from "redux-actions";
 
-import { getConfig, postConfig } from '../utils/fetch_configs';
-import { getAdminCounts } from './smart';
-import { setMessage } from './card';
-import { getHistory } from './history';
-import { getUnlabeled, getLabelCounts } from './skew';
-import { getDiscarded } from './recycleBin';
+import { getConfig, postConfig } from "../utils/fetch_configs";
+import { getAdminCounts } from "./smart";
+import { setMessage } from "./card";
+import { getHistory } from "./history";
+import { getUnlabeled, getLabelCounts } from "./skew";
+import { getDiscarded } from "./recycleBin";
 
-export const SET_ADMIN_DATA = 'SET_ADMIN_DATA';
-export const SET_DISCARDED_DATA = 'SET_DISCARDED_DATA';
+export const SET_ADMIN_DATA = "SET_ADMIN_DATA";
+export const SET_DISCARDED_DATA = "SET_DISCARDED_DATA";
+export const SET_ADMIN_COUNTS = "SET_ADMIN_COUNTS";
 
 export const set_admin_data = createAction(SET_ADMIN_DATA);
 export const set_discarded_data = createAction(SET_DISCARDED_DATA);
@@ -17,7 +17,7 @@ export const set_discarded_data = createAction(SET_DISCARDED_DATA);
 
 //get the skipped data for the admin Table
 export const getAdmin = (projectID) => {
-    let apiURL = `/api/data_admin_table/${projectID}/`;
+    const apiURL = `/api/data_admin_table/${projectID}/`;
     return dispatch => {
         return fetch(apiURL, getConfig())
             .then(response => {
@@ -31,8 +31,8 @@ export const getAdmin = (projectID) => {
             })
             .then(response => {
             // If error was in the response then set that message
-                if ('error' in response) console.log(response);
-                let all_data = [];
+                if ("error" in response) console.log(response);
+                const all_data = [];
                 for (let i = 0; i < response.data.length; i++) {
                     const row = {
                         id: response.data[i].ID,
@@ -49,10 +49,10 @@ export const getAdmin = (projectID) => {
 };
 
 export const adminLabel = (dataID, labelID, projectID) => {
-    let payload = {
+    const payload = {
         labelID: labelID,
     };
-    let apiURL = `/api/label_admin_label/${dataID}/`;
+    const apiURL = `/api/label_admin_label/${dataID}/`;
     return dispatch => {
         return fetch(apiURL, postConfig(payload))
             .then(response => {
@@ -65,7 +65,7 @@ export const adminLabel = (dataID, labelID, projectID) => {
                 }
             })
             .then(response => {
-                if ('error' in response) {
+                if ("error" in response) {
                     return dispatch(setMessage(response.error));
                 } else {
                     dispatch(getUnlabeled(projectID));
@@ -80,7 +80,7 @@ export const adminLabel = (dataID, labelID, projectID) => {
 
 //mark data as uncodable and put it in the recycle bin
 export const discardData = (dataID, projectID) => {
-    let apiURL = `/api/discard_data/${dataID}/`;
+    const apiURL = `/api/discard_data/${dataID}/`;
     return dispatch => {
         return fetch(apiURL, postConfig())
             .then(response => {
@@ -93,7 +93,7 @@ export const discardData = (dataID, projectID) => {
                 }
             })
             .then(response => {
-                if ('error' in response) {
+                if ("error" in response) {
                     return dispatch(setMessage(response.error));
                 } else {
                     dispatch(getAdmin(projectID));

@@ -4,10 +4,10 @@
  *  Make ajax call to `model_metrics` route.  This will fetch data to populate
  *  the line chart and show how well the model is training over time.
  */
-if (PROJECT_CLASSIFIER !== 'None') {
+if (PROJECT_CLASSIFIER !== "None") {
     $.ajax({
-        method: 'GET',
-        url: '/api/model_metrics/' + PROJECT_PK + '/?metric=accuracy',
+        method: "GET",
+        url: "/api/model_metrics/" + PROJECT_PK + "/?metric=accuracy",
         success: function (response) {
             let chart;
             nv.addGraph(function() {
@@ -23,24 +23,24 @@ if (PROJECT_CLASSIFIER !== 'None') {
                 ;
 
                 chart.yAxis
-                    .axisLabel('Metric')
+                    .axisLabel("Metric")
                     .tickFormat(function(d) {
-                        return d3.format(',.2f')(d);
+                        return d3.format(",.2f")(d);
                     })
                 ;
                 chart.noData("Insufficient training data -- please code more documents");
-                d3.select('#metric_chart svg')
+                d3.select("#metric_chart svg")
                     .datum(response)
                     .call(chart);
                 nv.utils.windowResize(chart.update);
                 return chart;
             });
-            $('#metric_select').change(function () {
+            $("#metric_select").change(function () {
                 $.ajax({
-                    method: 'GET',
-                    url: '/api/model_metrics/' + PROJECT_PK + '/?metric=' + $(this).val(),
+                    method: "GET",
+                    url: "/api/model_metrics/" + PROJECT_PK + "/?metric=" + $(this).val(),
                     success: function (response) {
-                        d3.select('#metric_chart svg')
+                        d3.select("#metric_chart svg")
                             .datum(response)
                             .transition()
                             .duration(300)
@@ -51,8 +51,8 @@ if (PROJECT_CLASSIFIER !== 'None') {
                         console.log(error);
                     }
                 });
-                let choice = $(this).val();
-                let children = $("#model_metrics").children();
+                const choice = $(this).val();
+                const children = $("#model_metrics").children();
                 if (choice === "accuracy") {
                     $("#model_metrics").text("Model Metrics: Accuracy ");
                     $("#model_metrics").append(children);
@@ -79,7 +79,7 @@ if (PROJECT_CLASSIFIER !== 'None') {
                       + "True Positives/(True Positives + False Negatives)");
                 }
                 $(function () {
-                    $('[data-toggle="tooltip"]').tooltip();
+                    $("[data-toggle=\"tooltip\"]").tooltip();
                 });
             });
 
@@ -95,16 +95,16 @@ $(document).ready(function() {
     /*
      *  Activate DataTable script to create the predicted data DataTable
      */
-    if (PROJECT_CLASSIFIER !== 'None' && PROJECT_LEARNING_METHOD !== 'random') {
-        $('#predicted_data_table').DataTable({
-            "ajax": '/api/data_predicted_table/' + PROJECT_PK + '/',
+    if (PROJECT_CLASSIFIER !== "None" && PROJECT_LEARNING_METHOD !== "random") {
+        $("#predicted_data_table").DataTable({
+            "ajax": "/api/data_predicted_table/" + PROJECT_PK + "/",
             "columns": [
                 { "data": "Text", "width": "70%" },
                 { "data": "Probability",
                     "searchable": false,
                     "width": "15%",
                     "render": function (data) {
-                        return d3.format('.2%')(data);
+                        return d3.format(".2%")(data);
                     },
                 },
                 { "data": "Label", "searchable": false, "width": "15%" }
@@ -114,13 +114,13 @@ $(document).ready(function() {
                 "sEmptyTable": "Insufficient training data -- please code more documents"
             },
             "initComplete": function () {
-                let $this = $(this);
-                $this.css({ 'table-layout':'fixed' });
-                $this.find('tr td:first-child').addClass('showData');
-                window.dispatchEvent(new Event('resize'));
+                const $this = $(this);
+                $this.css({ "table-layout":"fixed" });
+                $this.find("tr td:first-child").addClass("showData");
+                window.dispatchEvent(new Event("resize"));
             },
             "rowCallback": function (row) {
-                $('td:nth-child(1)', row).addClass('showData');
+                $("td:nth-child(1)", row).addClass("showData");
             }
         });
     }

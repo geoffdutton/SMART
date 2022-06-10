@@ -1,17 +1,17 @@
 /* global PROJECT_PK:false, PROJECT_PERCENTAGE_IRR:false */
 
 function drawHeatmap(response) {
-    let coders = response["coders"];
-    let labels = response["labels"];
-    let coder1 = $('#coder1_select').val();
-    let coder2 = $('#coder2_select').val();
-    let comb1 = coder1.toString() + "_" + coder2.toString();
-    let comb2 = coder2.toString() + "_" + coder1.toString();
+    const coders = response["coders"];
+    const labels = response["labels"];
+    const coder1 = $("#coder1_select").val();
+    const coder2 = $("#coder2_select").val();
+    const comb1 = coder1.toString() + "_" + coder2.toString();
+    const comb2 = coder2.toString() + "_" + coder1.toString();
     let data;
-    if (comb1 in response['data']) {
-        data = response['data'][comb1];
+    if (comb1 in response["data"]) {
+        data = response["data"][comb1];
     } else {
-        data = response['data'][comb2];
+        data = response["data"][comb2];
     }
 
     let all_zero = true;
@@ -41,7 +41,7 @@ function drawHeatmap(response) {
 
     //Code adapted from blocks example:
     //http://bl.ocks.org/tjdecke/5558084
-    let margin = { top: 100, right: 100, bottom: 200, left: 100 };
+    const margin = { top: 100, right: 100, bottom: 200, left: 100 };
     let width, height;
     if (labels.length > 10) {
         width = labels.length * 50;
@@ -60,15 +60,15 @@ function drawHeatmap(response) {
         colors = colors.slice(0, buckets);
     }
 
-    let gridSize = 50,
+    const gridSize = 50,
         legendElementWidth = 30;
 
     //delete the old chart
-    d3.select('#heatmap').remove();
+    d3.select("#heatmap").remove();
 
     if (!all_zero) {
     //append the new svg to put everything in
-        let svg = d3.select("#heatmap_chart").append("svg")
+        const svg = d3.select("#heatmap_chart").append("svg")
             .attr("id", "heatmap")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
@@ -111,13 +111,13 @@ function drawHeatmap(response) {
                 return ((i >= 7 && i <= 16) ? "horzLabel mono axis axis-worktime" : "horzLabel mono axis");
             });
 
-        let colorScale = d3.scale.quantile()
+        const colorScale = d3.scale.quantile()
             .domain([0, most_data + 1])
             .range(colors);
 
-        let cards = svg.selectAll(".label2")
+        const cards = svg.selectAll(".label2")
             .data(data, function(d) {
-                return d.label1 + ':' + d.label2;
+                return d.label1 + ":" + d.label2;
             });
         cards.append("title");
 
@@ -136,7 +136,7 @@ function drawHeatmap(response) {
             .style("fill", function(d) {
                 //Manually calculate the colors since the quantiles
                 //can have roundoff errors (ex: 1.00000001)
-                let quantiles = [0].concat(colorScale.quantiles());
+                const quantiles = [0].concat(colorScale.quantiles());
                 for (let i = 0; i < quantiles.length; i++) {
                     if (d.count <= Math.round(quantiles[i])) {
                         return colors[i];
@@ -168,7 +168,7 @@ function drawHeatmap(response) {
 
         cards.exit().remove();
 
-        let legend = svg.selectAll(".legend")
+        const legend = svg.selectAll(".legend")
             .data([0].concat(colorScale.quantiles()), function(d) {
                 return d;
             });
@@ -209,10 +209,10 @@ if (PROJECT_PERCENTAGE_IRR > 0) {
      */
     $.ajax({
         method: "GET",
-        url: '/api/get_irr_metrics/' + PROJECT_PK + '/',
+        url: "/api/get_irr_metrics/" + PROJECT_PK + "/",
         success: function (response) {
-            $('#kappa').text(response.kappa.toString());
-            $('#percent_agree').text(response['percent agreement'].toString());
+            $("#kappa").text(response.kappa.toString());
+            $("#percent_agree").text(response["percent agreement"].toString());
         },
         error: function (error) {
             console.log(error);
@@ -225,14 +225,14 @@ if (PROJECT_PERCENTAGE_IRR > 0) {
      */
     $.ajax({
         method: "GET",
-        url: '/api/heat_map_data/' + PROJECT_PK + '/',
+        url: "/api/heat_map_data/" + PROJECT_PK + "/",
         success: function (response) {
-            let coders = response['coders'];
+            const coders = response["coders"];
 
             if (coders.length >= 2) {
                 coders.map(function(coder){
-                    $('#coder1_select').append('<option value="' + coder.pk.toString() + '">' + coder.name + '</option>');
-                    $('#coder2_select').append('<option value="' + coder.pk.toString() + '">' + coder.name + '</option>');
+                    $("#coder1_select").append("<option value=\"" + coder.pk.toString() + "\">" + coder.name + "</option>");
+                    $("#coder2_select").append("<option value=\"" + coder.pk.toString() + "\">" + coder.name + "</option>");
                 });
                 drawHeatmap(response);
             }
@@ -242,10 +242,10 @@ if (PROJECT_PERCENTAGE_IRR > 0) {
         }
     });
 
-    $('#coder1_select').change(function () {
+    $("#coder1_select").change(function () {
         $.ajax({
-            method: 'GET',
-            url: '/api/heat_map_data/' + PROJECT_PK + '/',
+            method: "GET",
+            url: "/api/heat_map_data/" + PROJECT_PK + "/",
             success: function (response) {
                 drawHeatmap(response);
             },
@@ -255,10 +255,10 @@ if (PROJECT_PERCENTAGE_IRR > 0) {
         });
     });
 
-    $('#coder2_select').change(function () {
+    $("#coder2_select").change(function () {
         $.ajax({
-            method: 'GET',
-            url: '/api/heat_map_data/' + PROJECT_PK + '/',
+            method: "GET",
+            url: "/api/heat_map_data/" + PROJECT_PK + "/",
             success: function (response) {
                 drawHeatmap(response);
             },
@@ -272,8 +272,8 @@ if (PROJECT_PERCENTAGE_IRR > 0) {
         /*
          *  Activate DataTable script to create the labeled data DataTable
          */
-        $('#pairwise_perc_agreement_table').DataTable({
-            "ajax": '/api/perc_agree_table/' + PROJECT_PK + '/',
+        $("#pairwise_perc_agreement_table").DataTable({
+            "ajax": "/api/perc_agree_table/" + PROJECT_PK + "/",
             "columns": [
                 { "data": "First Coder", "searchable": true },
                 { "data": "Second Coder", "searchable": false },
@@ -284,8 +284,8 @@ if (PROJECT_PERCENTAGE_IRR > 0) {
                 "sEmptyTable": "No irr data processed"
             },
             "initComplete": function () {
-                let $this = $(this);
-                $this.css({ 'table-layout':'fixed' });
+                const $this = $(this);
+                $this.css({ "table-layout":"fixed" });
             }
         });
     });

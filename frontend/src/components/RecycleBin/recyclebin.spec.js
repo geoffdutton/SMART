@@ -1,21 +1,30 @@
-import React, {Component} from 'react';
-import { shallow } from 'enzyme';
-import { assert } from 'chai';
-import RecycleBin from './index';
+import React from "react";
+import createSmartStore from "@/store";
+import { renderWithStore } from "#test-utils";
+import RecycleBin from "./index";
 
-describe('<RecycleBin />', () => {
-    describe('render', () => {
-        it('renders properly if all props provided', () => {
-            const fn = () => {};
-            const data = [];
+const initialState = {};
 
-            const wrapper = shallow(
-                <RecycleBin
-                  getDiscarded = {fn}
-                  discarded_data = {data}
-                  restoreData = {fn}
-                />
-            );
-        });
+describe("<RecycleBin />", () => {
+    /** @type {import('redux').Store} */
+    let store;
+    let comp;
+    beforeEach(() => {
+        store = createSmartStore(initialState);
+    });
+
+    it("renders properly if all props provided", () => {
+        const fn = () => {};
+        const data = [];
+
+        comp = renderWithStore(
+            <RecycleBin
+                getDiscarded = {fn}
+                discarded_data = {data}
+                restoreData = {fn}
+            />,
+            { store }
+        );
+        expect(comp).not.toBeNull();
     });
 });

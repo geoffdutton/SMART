@@ -3,29 +3,51 @@ const webpack = require("webpack");
 const path = require("path");
 
 const release = process.env.NODE_ENV === "production";
+console.log("process.env.NODE_ENV", process.env.NODE_ENV);
 
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const StyleLintPlugin = require("stylelint-webpack-plugin");
+const BundleTracker = require("webpack-bundle-tracker");
+
+const DEV_SERVER_PORT = 3005;
 
 const config = {
     context: path.join(__dirname, "src"),
     devtool: "source-map",
     mode: "development",
+    output: {
+        publicPath: "/static/",
+        // publicPath: `http://localhost:${DEV_SERVER_PORT}/static/`,
+        path: path.resolve(__dirname, "dist"),
+        filename: "[name].js" // "[name].[chunkhash].js"
+    },
     entry: {
         smart: "./smart.jsx",
         globals: "./globals.js",
         admins: "./admins.js"
     },
     devServer: {
-        writeToDisk: true
+        port: DEV_SERVER_PORT,
+        hot: true,
+        proxy: {
+            "!/static/**": {
+                // django server
+                target: "http://localhost:8099",
+                changeOrigin: true
+            }
+        }
+        // historyApiFallback: true,
+        // headers: {
+        //     "Access-Control-Allow-Origin": "*",
+        // },
     },
     module: {
         rules: [
             {
                 test: /\.jsx?$/,
                 exclude: /node_modules/,
-                use: ["babel-loader", "eslint-loader"]
+                // use: ["babel-loader", "eslint-loader"] -> npm i -D "eslint-loader": "^4.0.2"
+                use: ["babel-loader"]
             },
             {
                 test: /\.css$/,
@@ -67,7 +89,7 @@ const config = {
                         options: {
                             sourceMap: true,
                             sassOptions: {
-                                outputStyle: release ? "compress" : "expanded"
+                                outputStyle: release ? "compressed" : "expanded"
                             }
                         }
                     }
@@ -91,7 +113,7 @@ const config = {
                 ]
             },
             {
-                test: /\.(jpe?g|gif|html)$/,
+                test: /\.(jpe?g|gif|html|ico)$/,
                 use: [
                     {
                         loader: "file-loader",
@@ -124,15 +146,16 @@ const config = {
             }
         ]
     },
-    output: {
-        path: path.resolve(__dirname, "dist"),
-        filename: "[name].[chunkhash].js"
-    },
     plugins: [
-        new StyleLintPlugin({
-            context: "/code/src/styles"
+        new webpack.DefinePlugin({
+            DEBUG: release,
+            PRODUCTION: release,
+            "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV || "development")
         }),
-        new MiniCssExtractPlugin({ filename: "[name].[contenthash].css" }),
+        new MiniCssExtractPlugin({
+            // filename: "[name].[contenthash].css"
+            filename: "[name].css"
+        }),
         new webpack.ProvidePlugin({
             $: "jquery",
             jQuery: "jquery",
@@ -143,76 +166,19 @@ const config = {
             root: path.resolve(),
             verbose: true,
             dry: false
+        }),
+        new BundleTracker({
+            path: path.resolve(__dirname),
+            filename: "./webpack-stats.json",
         })
     ],
     resolve: {
-        modules: ["node_modules", path.join(__dirname, "src")],
+        alias: {
+            "@/": path.resolve(__dirname, "src"),
+            "#test-utils": path.resolve(__dirname, "test-utils.js")
+        },
         extensions: [".js", ".jsx"]
     }
 };
-
-if (release) {
-    config.plugins.push(
-        new webpack.DefinePlugin({
-            DEBUG: false,
-            PRODUCTION: true,
-            "process.env.NODE_ENV": JSON.stringify("production")
-        }),
-        new webpack.optimize.AggressiveMergingPlugin(),
-        // new webpack.optimize.OccurrenceOrderPlugin(),
-        // new webpack.optimize.UglifyJsPlugin({
-        //     mangle: true,
-        //     compress: {
-        //         warnings: false,
-        //         pure_getters: true,
-        //         unsafe_comps: true,
-        //         screw_ie8: true
-        //     },
-        //     output: {
-        //         comments: false
-        //     },
-        //     exclude: [/\.min\.js$/gi],
-        //     sourceMap: true
-        // }),
-        new webpack.LoaderOptionsPlugin({
-            minimize: true,
-            debug: false
-        })
-    );
-} else {
-    config.performance = {
-        assetFilter: function(assetFilename) {
-            return (
-                assetFilename.endsWith(".js") || assetFilename.endsWith(".css")
-            );
-        },
-        hints: "warning",
-        maxEntrypointSize: 1000000
-    };
-
-    config.profile = true;
-
-    config.plugins.push(
-        new webpack.DefinePlugin({
-            DEBUG: true,
-            PRODUCTION: false
-        })
-    );
-}
-
-config.plugins.push(
-    new webpack.optimize.SplitChunksPlugin({
-        name: "vendor",
-        minChunks: function(module) {
-            return (
-                module.context && module.context.indexOf("node_modules") !== -1
-            );
-        }
-    }),
-    new webpack.optimize.SplitChunksPlugin({
-        name: "manifest",
-        minChunks: Infinity
-    })
-);
 
 module.exports = config;

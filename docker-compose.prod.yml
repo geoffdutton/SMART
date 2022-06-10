@@ -1,0 +1,22 @@
+services:
+  smart_backend:
+    build:
+      context: backend
+      dockerfile: Dockerfile.prod
+    image: geoffd/smart-backend-prod:${TAG:-latest}
+    restart: always
+    depends_on:
+      - postgres
+      - redis
+
+  smart_frontend:
+    build:
+      context: frontend
+      dockerfile: Dockerfile.prod
+    environment:
+      - NODE_ENV=production
+    command: npm start
+
+volumes:
+  smart_pgdata:
+  smart_data:

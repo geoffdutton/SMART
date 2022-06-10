@@ -1,25 +1,36 @@
-import React, {Component} from 'react';
-import { shallow } from 'enzyme';
-import { assert } from 'chai';
-import Skew from './index';
+import React from "react";
+import createSmartStore from "@/store";
+import { renderWithStore } from "#test-utils";
+import Skew from "./index";
 
-describe('<Skew />', () => {
-    describe('render', () => {
-        it('renders properly if all props provided', () => {
-            const fn = () => {};
-            const data = [];
-            const labels = [];
+const initialState = {};
 
-            const wrapper = shallow(
-                <Skew
-                  getUnlabeled = {fn}
-                  unlabeled_data={data}
-                  labels={labels}
-                  skewLabel={fn}
-                  getLabelCounts={fn}
-                  label_counts={data}
-                />
-            );
-        });
+describe("<Skew />", () => {
+    /** @type {import('redux').Store} */
+    let store;
+    let comp;
+    let labels;
+    let labelCounts;
+    beforeEach(() => {
+        store = createSmartStore(initialState);
+        labels = [];
+        labelCounts = [];
+    });
+
+    it("renders properly if all props provided", () => {
+        const fn = () => {};
+
+        comp = renderWithStore(
+            <Skew
+                getUnlabeled = {fn}
+                unlabeled_data={labelCounts}
+                labels={labels}
+                skewLabel={fn}
+                getLabelCounts={fn}
+                label_counts={labelCounts}
+            />,
+            { store }
+        );
+        expect(comp).not.toBeNull();
     });
 });

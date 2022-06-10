@@ -1,0 +1,7 @@
+[flake8]
+exclude =
+    manage.py
+    frontend
+ignore =
+    W503,E501,E203
+    W605,E231,E203

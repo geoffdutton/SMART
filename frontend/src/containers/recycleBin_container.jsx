@@ -1,8 +1,8 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from "react";
+import { connect } from "react-redux";
 
-import { getDiscarded, restoreData } from '../actions/recycleBin';
-import RecycleBin from '../components/RecycleBin';
+import { getDiscarded, restoreData } from "../actions/recycleBin";
+import RecycleBin from "../components/RecycleBin";
 
 const PROJECT_ID = window.PROJECT_ID;
 

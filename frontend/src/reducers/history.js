@@ -1,7 +1,7 @@
-import { handleActions } from 'redux-actions';
-import update from 'immutability-helper';
+import { handleActions } from "redux-actions";
+import update from "immutability-helper";
 
-import { SET_HIST_DATA } from '../actions/history';
+import { SET_HIST_DATA } from "../actions/history";
 
 const initialState = {
     history_data: []

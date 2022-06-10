@@ -48,9 +48,11 @@ class Skew extends React.Component {
             return (
                 <div>
                     <u>Background Data</u>
+
                     {row.row["metadata"].map(val => (
                         <p key={val}>{val}</p>
                     ))}
+
                     <u>Text to Label</u>
                 </div>
             );
@@ -60,7 +62,7 @@ class Skew extends React.Component {
     render() {
         const { unlabeled_data, labels, skewLabel, label_counts } = this.props;
 
-        let labelsOptions = labels.map(label =>
+        const labelsOptions = labels.map(label =>
             Object.assign(label, { value: label["pk"] })
         );
 
@@ -69,22 +71,26 @@ class Skew extends React.Component {
                 <div className="row">
                     <div className="col-md-6">
                         <h3>Instructions</h3>
+
                         <p>
                             This page allows an admin to manually search for and
                             annotate data in the case of a particularly bad data
                             skew.
                         </p>
+
                         <p>
                             To the left is a chart that shows the distribution
                             of labels in the project. Below is all of the
                             unlabeled data that are not in a queue.
                         </p>
+
                         <p>
                             To annotate, click on a data entry below and select
                             the label from the expanded list of labels. As you
                             label data the chart to the left will update.
                         </p>
                     </div>
+
                     <div className="col-md-6">
                         <Card id="chart_panel">
                             <NVD3Chart
@@ -114,7 +120,9 @@ class Skew extends React.Component {
                         </Card>
                     </div>
                 </div>
+
                 <CodebookLabelMenuContainer />
+
                 <ReactTable
                     data={unlabeled_data}
                     columns={COLUMNS}
@@ -127,7 +135,9 @@ class Skew extends React.Component {
                         return (
                             <div className="sub-row">
                                 {this.getText(row)}
+
                                 <p id="skew_text">{row.row.data}</p>
+
                                 <div id="skew_buttons">
                                     <ButtonToolbar variant="btn-toolbar pull-right">
                                         {labels.length > 5 ? (

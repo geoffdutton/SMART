@@ -1,18 +1,17 @@
-import { createAction } from 'redux-actions';
-import 'whatwg-fetch';
-import moment from 'moment';
+import { createAction } from "redux-actions";
+import moment from "moment";
 
-import { getConfig, postConfig } from '../utils/fetch_configs';
-import { getHistory } from './history';
-import { getAdmin } from './adminTables';
-import { getLabelCounts } from './skew';
-import { getAdminCounts } from './smart';
+import { getConfig, postConfig } from "../utils/fetch_configs";
+import { getHistory } from "./history";
+import { getAdmin } from "./adminTables";
+import { getLabelCounts } from "./skew";
+import { getAdminCounts } from "./smart";
 
-export const POP_CARD = 'POP_CARD';
-export const PUSH_CARD = 'PUSH_CARD';
-export const SET_LABEL = 'SET_LABEL';
-export const SET_MESSAGE = 'SET_MESSAGE';
-export const CLEAR_DECK = 'CLEAR_DECK';
+export const POP_CARD = "POP_CARD";
+export const PUSH_CARD = "PUSH_CARD";
+export const SET_LABEL = "SET_LABEL";
+export const SET_MESSAGE = "SET_MESSAGE";
+export const CLEAR_DECK = "CLEAR_DECK";
 
 export const popCard = createAction(POP_CARD);
 export const pushCard = createAction(PUSH_CARD);
@@ -20,57 +19,50 @@ export const setLabel = createAction(SET_LABEL);
 export const setMessage = createAction(SET_MESSAGE);
 export const clearDeck = createAction(CLEAR_DECK);
 
+const firstResponseHandler = async (res) => {
+    if (res.ok) {
+        return res.json();
+    }
+    const error = new Error(res.statusText);
+    error.response = res;
+    throw error;
+
+};
+
 // Create cards by reading from a queue
-export const fetchCards = (projectID) => {
-    let apiURL = `/api/get_card_deck/${projectID}/`;
-    return dispatch => {
-        return fetch(apiURL, getConfig())
-            .then(response => {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    const error = new Error(response.statusText);
-                    error.response = response;
-                    throw error;
-                }
-            })
-            .then(response => {
-                // If error was in the response then set that message
-                if ('error' in response) return dispatch(setMessage(response.error));
+export const fetchCards = (projectID) => dispatch => {
+    const apiURL = `/api/get_card_deck/${projectID}/`;
+    return fetch(apiURL, getConfig())
+        .then(firstResponseHandler)
+        .then(response => {
+            // If error was in the response then set that message
+            if ("error" in response) {
+                return dispatch(setMessage(response.error));
+            }
+            dispatch(setLabel(response.labels));
 
-                dispatch(setLabel(response.labels));
-
-                for (let i = 0; i < response.data.length; i++) {
-                    const card = {
-                        id: i,
-                        text: response.data[i]
-                    };
-                    dispatch(pushCard(card));
-                }
-            })
-            .catch(err => console.log("Error: ", err));
-    };
+            response.data.forEach((item, i) => {
+                const card = {
+                    id: i,
+                    text: item
+                };
+                dispatch(pushCard(card));
+            });
+        })
+        .catch(err => console.error("Error: ", err));
 };
 
 export const annotateCard = (card, labelID, num_cards_left, projectID, is_admin) => {
-    let payload = {
+    const payload = {
         labelID: labelID,
-        labeling_time: moment().diff(card['start_time'], 'seconds') // now - start_time rounded to whole seconds
+        labeling_time: moment().diff(card["start_time"], "seconds") // now - start_time rounded to whole seconds
     };
-    let apiURL = `/api/annotate_data/${card.text.pk}/`;
+    const apiURL = `/api/annotate_data/${card.text.pk}/`;
     return dispatch => {
         return fetch(apiURL, postConfig(payload))
+            .then(firstResponseHandler)
             .then(response => {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    const error = new Error(response.statusText);
-                    error.response = response;
-                    throw error;
-                }
-            })
-            .then(response => {
-                if ('error' in response) {
+                if ("error" in response) {
                     dispatch(clearDeck());
                     return dispatch(setMessage(response.error));
                 } else {
@@ -90,20 +82,12 @@ export const annotateCard = (card, labelID, num_cards_left, projectID, is_admin)
 
 //skip a card and put it in the admin table
 export const passCard = (card, num_cards_left, is_admin, projectID ) => {
-    let apiURL = `/api/skip_data/${card.text.pk}/`;
+    const apiURL = `/api/skip_data/${card.text.pk}/`;
     return dispatch => {
         return fetch(apiURL, postConfig())
+            .then(firstResponseHandler)
             .then(response => {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    const error = new Error(response.statusText);
-                    error.response = response;
-                    throw error;
-                }
-            })
-            .then(response => {
-                if ('error' in response) {
+                if ("error" in response) {
                     dispatch(clearDeck());
                     return dispatch(setMessage(response.error));
                 } else {

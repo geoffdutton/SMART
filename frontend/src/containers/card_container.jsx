@@ -1,8 +1,8 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from "react";
+import { connect } from "react-redux";
 
-import { fetchCards, annotateCard, passCard } from '../actions/card';
-import DataCard from '../components/DataCard';
+import { fetchCards, annotateCard, passCard } from "../actions/card";
+import DataCard from "../components/DataCard";
 
 const PROJECT_ID = window.PROJECT_ID;
 
